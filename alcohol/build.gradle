@@ -43,8 +43,10 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'             // 핫리로드
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.withType(Test).configureEach {
 	useJUnitPlatform()
 }
+

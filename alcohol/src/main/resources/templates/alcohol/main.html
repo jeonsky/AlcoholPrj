@@ -1,14 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Alcohol 메인</title>
-    <link rel="stylesheet" href="/css/site.css">
+    <title>주류 커뮤니티 메인</title>
+    <!-- 분리한 CSS 불러오기 -->
+    <link rel="stylesheet" th:href="@{/css/site.css}">
 </head>
 <body>
-<h2>주류 메뉴 메인 🍶</h2>
-<p th:text="${msg}">메시지</p>
-<p><a th:href="@{/}">홈으로</a></p>
+<header>
+    <h2>주류 커뮤니티</h2>
+    <nav>
+        <a th:href="@{/}">홈</a>
+        <a th:href="@{/alcohol/main}">메인</a>
+        <a th:href="@{/alcohol/board}">자유게시판</a>
+        <a th:href="@{/alcohol/tasting}">시음 후기</a>
+        <a th:href="@{/alcohol/login}">로그인</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>추천 카드</h2>
+
+    <!-- 카드 그리드 -->
+    <div class="card-grid">
+        <!-- 타임리프 목록 바인딩: 서버에서 cards 내려줬을 때 -->
+        <div class="card" th:each="c : ${cards}">
+            <img th:src="${c.imageUrl}" alt="" loading="lazy">
+            <h3 th:text="${c.title}">카드 제목</h3>
+            <p th:text="${c.subtitle}">간단한 설명</p>
+        </div>
+
+        <!-- 테스트용 정적 카드 (서버 바인딩 전에 확인용) -->
+        <div class="card">
+            <img src="https://via.placeholder.com/400x240/4CAF50/FFFFFF?text=Card+1" alt="Card 1">
+            <h3>위스키 카드</h3>
+            <p>위스키 애호가를 위한 혜택</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/400x240/2196F3/FFFFFF?text=Card+2" alt="Card 2">
+            <h3>와인 카드</h3>
+            <p>프리미엄 와인샵 할인</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/400x240/FF5722/FFFFFF?text=Card+3" alt="Card 3">
+            <h3>맥주 카드</h3>
+            <p>수제 맥주 이벤트</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/400x240/9C27B0/FFFFFF?text=Card+4" alt="Card 4">
+            <h3>칵테일 카드</h3>
+            <p>칵테일 무료 제공</p>
+        </div>
+    </div>
+</div>
+
 <script src="/js/app.js"></script>
 </body>
 </html>
