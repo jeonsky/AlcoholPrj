@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>주류 커뮤니티 메인</title>
-    <!-- 분리한 CSS 불러오기 -->
     <link rel="stylesheet" th:href="@{/css/site.css}">
 </head>
 <body>
@@ -21,36 +20,36 @@
 <div class="container">
     <h2>추천 카드</h2>
 
-    <!-- 카드 그리드 -->
     <div class="card-grid">
-        <!-- 타임리프 목록 바인딩: 서버에서 cards 내려줬을 때 -->
+        <!-- 서버에서 cards 내려올 때 렌더 -->
         <div class="card" th:each="c : ${cards}">
-            <img th:src="${c.imageUrl}" alt="" loading="lazy">
-            <h3 th:text="${c.title}">카드 제목</h3>
-            <p th:text="${c.subtitle}">간단한 설명</p>
+            <img th:src="${c.imageUrl}" alt="">
+            <h3 th:text="${c.title}">제목</h3>
+            <p th:text="${c.subtitle}">설명</p>
         </div>
 
-        <!-- 테스트용 정적 카드 (서버 바인딩 전에 확인용) -->
+        <!-- ↓ 테스트용(임시 데이터) — 서버 바인딩 전 화면 확인용 -->
         <div class="card">
-            <img src="https://via.placeholder.com/400x240/4CAF50/FFFFFF?text=Card+1" alt="Card 1">
-            <h3>위스키 카드</h3>
+            <img th:src="@{/img/whisky.jpeg}" alt="whisky">
+            <h3>위스키</h3>
             <p>위스키 애호가를 위한 혜택</p>
         </div>
         <div class="card">
-            <img src="https://via.placeholder.com/400x240/2196F3/FFFFFF?text=Card+2" alt="Card 2">
-            <h3>와인 카드</h3>
+            <img th:src="@{/img/wine.jpeg}" alt="wine">
+            <h3>와인</h3>
             <p>프리미엄 와인샵 할인</p>
         </div>
         <div class="card">
-            <img src="https://via.placeholder.com/400x240/FF5722/FFFFFF?text=Card+3" alt="Card 3">
-            <h3>맥주 카드</h3>
+            <img th:src="@{/img/beer.jpeg}" alt="beer">
+            <h3>맥주</h3>
             <p>수제 맥주 이벤트</p>
         </div>
         <div class="card">
-            <img src="https://via.placeholder.com/400x240/9C27B0/FFFFFF?text=Card+4" alt="Card 4">
-            <h3>칵테일 카드</h3>
+            <img th:src="@{/img/cocktail.jpeg}" alt="cocktail">
+            <h3>칵테일</h3>
             <p>칵테일 무료 제공</p>
         </div>
+        <!-- ↑ 테스트용 끝 -->
     </div>
 </div>
 

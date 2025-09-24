@@ -1,73 +1,36 @@
-/* 전체 레이아웃 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5;
+:root{
+  --bg:#f6f7f9; --fg:#111; --muted:#666;
+  --brand:#4CAF50; --card:#fff;
+  --radius:12px; --gap:20px; --max:1200px;
+  --shadow-sm:0 2px 6px rgba(0,0,0,.1);
+  --shadow-lg:0 12px 28px rgba(0,0,0,.18);
 }
 
-/* 상단 메뉴 */
-header {
-    background: #111;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif}
+a{text-decoration:none;color:inherit}
 
-header nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
-    transition: color 0.2s;
-}
+header{background:#111;color:#fff;padding:16px 24px;display:flex;gap:16px;align-items:center}
+header h2{margin:0;font-size:18px}
+header nav{margin-left:auto;display:flex;gap:12px}
+header nav a{opacity:.9} header nav a:hover{opacity:1}
 
-header nav a:hover {
-    color: #4CAF50;
-}
+.container{max-width:var(--max);margin:32px auto;padding:0 16px}
 
-/* 메인 컨테이너 */
-.container {
-    width: 90%;
-    margin: 30px auto;
-}
+.card-grid{display:grid;gap:var(--gap);
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 
-/* 카드 레이아웃 */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,filter .25s}
+.card:hover,.card:focus-within{transform:translateY(-6px) scale(1.01);
+  box-shadow:var(--shadow-lg);filter:saturate(1.05)}
 
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.card h3{margin:12px 16px 6px;font-size:16px}
+.card p{margin:0 16px 16px;color:var(--muted);font-size:14px}
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
+/* 접근성 살짝 + 모션 민감 사용자 배려 */
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
 
-/* 카드 안 이미지 */
-.card img {
-    max-width: 100%;
-    border-radius: 8px;
-}
-
-/* 카드 제목 */
-.card h3 {
-    margin: 15px 0 10px;
-}
-
-/* 카드 설명 */
-.card p {
-    color: #555;
-    font-size: 14px;
-}
