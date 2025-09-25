@@ -1,36 +1,108 @@
+/* ========= Color Palette & Vars ========= */
 :root{
-  --bg:#f6f7f9; --fg:#111; --muted:#666;
-  --brand:#4CAF50; --card:#fff;
-  --radius:12px; --gap:20px; --max:1200px;
-  --shadow-sm:0 2px 6px rgba(0,0,0,.1);
-  --shadow-lg:0 12px 28px rgba(0,0,0,.18);
+  --bg:#CBD2D4; --fg:#333; --muted:#60748A; --brand:#57737A; --card:#fff;
+  --radius:12px; --gap:18px; --max:1200px; --pad:clamp(16px,2vw,24px);
+  --shadow-sm:0 2px 6px rgba(0,0,0,.08); --shadow-lg:0 12px 28px rgba(0,0,0,.16);
 }
 
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);
-  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif}
-a{text-decoration:none;color:inherit}
+/* ========= Reset / Typography ========= */
+*{ box-sizing:border-box }
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;
+}
+a{ color:inherit; text-decoration:none }
+:focus-visible{ outline:3px solid var(--brand); outline-offset:2px }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important } }
 
-header{background:#111;color:#fff;padding:16px 24px;display:flex;gap:16px;align-items:center}
-header h2{margin:0;font-size:18px}
-header nav{margin-left:auto;display:flex;gap:12px}
-header nav a{opacity:.9} header nav a:hover{opacity:1}
+/* ========= Navbar ========= */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:var(--fg); color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.12);
+}
+.site-header .wrap{
+  display:flex; align-items:center; gap:16px; padding:14px 24px;
+  max-width:var(--max); margin:0 auto;
+}
+.brand{ font-weight:700; font-size:20px; letter-spacing:.2px }
+.site-header .nav{ margin-left:auto; display:flex; gap:18px }
+.site-header .nav a{ color:#fff; opacity:.9; font-weight:500; transition:opacity .2s,color .2s }
+.site-header .nav a:hover{ opacity:1; color:#E7F1F3; text-decoration:underline }
+@media (max-width:900px){ .site-header .wrap{ padding:12px 16px } }
 
-.container{max-width:var(--max);margin:32px auto;padding:0 16px}
+/* ========= Generic Layout ========= */
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad) }
+section{ margin:46px 0 }
 
-.card-grid{display:grid;gap:var(--gap);
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+/* ========= Hero ========= */
+.hero{
+  padding:34px 0;
+  display:grid; gap:14px;
+  grid-template-columns:1.2fr 1fr;
+  align-items:center;
+}
+h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
+.lead{ margin-top:10px; color:var(--muted) }
 
-.card{background:var(--card);border-radius:var(--radius);overflow:hidden;
-  box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,filter .25s}
-.card:hover,.card:focus-within{transform:translateY(-6px) scale(1.01);
-  box-shadow:var(--shadow-lg);filter:saturate(1.05)}
+.hero-media{ display:flex; justify-content:center; align-items:center }
+.hero .avatar{
+  width:clamp(240px,14vw,160px);
+  height:clamp(240px,14vw,160px);
+  object-fit:cover;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.1);
+}
 
-.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.card h3{margin:12px 16px 6px;font-size:16px}
-.card p{margin:0 16px 16px;color:var(--muted);font-size:14px}
+/* ========= Buttons / Pills ========= */
+.cta{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap }
+.btn{
+  display:inline-block; padding:12px 18px; border-radius:12px;
+  border:1px solid rgba(0,0,0,.12); font-weight:600;
+  background:#fff; color:var(--fg);
+}
+.btn:hover{ border-color:rgba(0,0,0,.24) }
+.btn.primary{ background:var(--brand); color:#fff; border-color:var(--brand) }
+.btn.primary:hover{ background:var(--fg); border-color:var(--fg) }
+.pill{
+  display:inline-block; padding:6px 10px;
+  border:1px solid rgba(0,0,0,.12); border-radius:999px; background:#fff; font-size:14px;
+}
 
-/* 접근성 살짝 + 모션 민감 사용자 배려 */
-:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+/* ========= Panels (Equal Height Only) ========= */
+.panel{
+  display:flex; flex-direction:column;
+  gap:12px; padding:20px;
+  border-radius:var(--radius);
+  background:var(--card);
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:var(--shadow-sm);
+  height:100%;                 /* grid row 높이에 맞춰 늘어남 */
+}
+.panel h3{ margin:0 0 8px; font-size:18px; line-height:1.35; letter-spacing:.1px }
+.panel p{ margin:0; color:var(--fg) }
+.panel ul{ margin:0; padding-left:18px }
+.panel li{ margin:4px 0 }
+.panel .cta{ display:flex; gap:10px; flex-wrap:wrap }
 
+/* ========= 2열 레이아웃 ========= */
+.two{
+  display:grid;
+  gap:var(--gap);
+  grid-template-columns:1fr 1fr;
+  align-items:stretch;          /* 같은 행은 같은 높이 */
+}
+.two > *{ align-self:stretch }
+
+/* ========= Expandable 제거(무력화) ========= */
+.panel.expandable{ cursor:default; transition:none }
+.panel.expandable .more{ margin-top:8px; max-height:none; overflow:visible; transition:none }
+
+/* ========= Footer ========= */
+footer{ margin:56px 0 24px; text-align:center; font-size:14px; color:rgba(0,0,0,.6) }
+
+/* ========= Responsive ========= */
+@media (max-width:900px){
+  .hero{ grid-template-columns:1fr }
+  .two{ grid-template-columns:1fr }
+}
