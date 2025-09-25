@@ -1,0 +1,77 @@
+/* ===== 메인 전용 공통 ===== */
+body.app{ background:var(--bg); color:var(--fg); }
+
+/* 네비바 */
+body.app .app-header{
+  position:sticky; top:0; z-index:50;
+  background: #243744;            /* 원하면 var(--nav)로 빼도 됨 */
+  color:#fff; box-shadow:0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.12);
+}
+body.app .app-header .inner{
+  max-width:var(--max); margin:0 auto; padding:12px 20px;
+  display:flex; align-items:center; gap:18px;
+}
+body.app .logo{ font-weight:800; letter-spacing:.2px }
+body.app .app-nav{ margin-left:auto; display:flex; gap:18px }
+body.app .app-nav a{ color:#cfe0ea; font-weight:600; opacity:.9; }
+body.app .app-nav a:hover{ opacity:1; color:#fff; text-decoration:underline }
+body.app .app-nav a.active{ color:#fff; }
+
+/* 컨테이너 */
+body.app .app-wrap{ max-width:var(--max); margin:26px auto 80px; padding:0 var(--pad) }
+body.app .section-title{ margin:12px 0 14px; font-size:22px }
+
+/* 카드 그리드 */
+body.app .card-grid{
+  display:grid; gap:16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* 카드 */
+body.app .card{
+  background: var(--card);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  transform: translateY(0);
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, filter .18s ease;
+  cursor:pointer;
+  outline: none;
+}
+body.app .card img{
+  width:100%; aspect-ratio: 16 / 10; object-fit: cover; display:block;
+}
+body.app .card .card-body{ padding:12px 14px }
+body.app .card h3{ margin:0 0 6px; font-size:16px }
+body.app .card p{ margin:0; color:var(--muted); font-size:14px }
+
+/* 현대카드 느낌: 호버 = 살짝 상승 + 선명도 ↑ */
+body.app .card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  filter: saturate(1.03);
+}
+
+/* 키보드 포커스 */
+body.app .card:focus-visible{
+  box-shadow: 0 0 0 3px rgba(255,255,255,.8), 0 0 0 6px rgba(20,115,230,.4), 0 10px 22px rgba(0,0,0,.18);
+  transform: translateY(-6px);
+}
+
+/* 클릭 시 '탁' 하고 더 떠오르는 애니메이션 */
+@keyframes card-pop {
+  0%   { transform: translateY(0) }
+  55%  { transform: translateY(-14px) }
+  100% { transform: translateY(-8px) }
+}
+body.app .card.pop{
+  animation: card-pop .28s cubic-bezier(.2,.9,.2,1);
+  box-shadow: 0 14px 28px rgba(0,0,0,.22);
+}
+
+/* 모바일 */
+@media (max-width:540px){
+  body.app .app-header .inner{ padding:10px 14px }
+  body.app .app-nav{ gap:12px }
+}

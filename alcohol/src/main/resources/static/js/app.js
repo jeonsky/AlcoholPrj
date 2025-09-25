@@ -1,16 +1,17 @@
-// app.js — 패널 클릭 모달(연락 카드 제외)
+// app.js — 패널 클릭 모달(contact 카드 제외)
 document.addEventListener('DOMContentLoaded', () => {
   const $all = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
   /* 섹션별 동일 높이 */
   const sections = $all('.two');
   const equalize = (section) => {
-    const cards = $all('.panel', section);
-    if (!cards.length) return;
-    cards.forEach(c => c.style.height = 'auto');
-    const max = Math.max(...cards.map(c => Math.ceil(c.getBoundingClientRect().height)));
-    cards.forEach(c => c.style.height = max + 'px');
+  const cards = $all('.panel', section);
+  if (!cards.length) return;
+  cards.forEach(c => c.style.height = 'auto');
+  const max = Math.max(...cards.map(c => Math.ceil(c.getBoundingClientRect().height)));
+  cards.forEach(c => c.style.height = max + 'px');
   };
+
   const equalizeAll = () => sections.forEach(equalize);
   equalizeAll();
   window.addEventListener('load', equalizeAll);
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     document.body.appendChild(modal);
   }
+
   const backdrop = modal.querySelector('.modal__backdrop');
   const content  = modal.querySelector('.modal__content');
   const closeBtn = modal.querySelector('.modal__close');
@@ -44,12 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('modal-open');
     closeBtn?.focus();
   };
+
   const closeModal = () => {
     modal.classList.remove('is-open');
     document.body.classList.remove('modal-open');
     content.innerHTML = '';
     lastFocus?.focus?.();
   };
+
   backdrop?.addEventListener('click', closeModal);
   closeBtn?.addEventListener('click', closeModal);
   document.addEventListener('keydown', e => {
