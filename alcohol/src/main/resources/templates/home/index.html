@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>하늘 · Alcohol Prj</title>
     <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="site-header">
     <div class="wrap">
         <strong class="brand">🍻 Alcohol Holic</strong>
         <nav class="nav">
-            <a th:href="@{/}">소개</a>
             <a th:href="@{/alcohol/main}">데모 버전 보기</a>
         </nav>
     </div>
@@ -22,11 +24,15 @@
     <section class="hero">
         <div>
             <h1>하늘이 사이드 프로젝트 🥴</h1>
-            <p class="lead">“주류 취향을 공유하고, 시음 후기를 나누는 커뮤니티를 만들고 싶어”</p>
+            <p class="lead"><strong>“주류 취향을 공유하고, 시음 후기를 나누는 커뮤니티를 만들고 싶어”</strong>
+            <br>안녕하세요 👋 금융권 백엔드 개발자로 일하고 있는 하늘입니다 ☁️
+            <br></p>
+
             <div class="cta">
                 <a class="btn primary" th:href="@{/alcohol/main}">🍺 데모 바로 보기</a>
-                <a class="btn" href="https://github.com/jeonsky/AlcoholPrj" target="_blank" rel="noopener">GitHub 보기</a>
+                <a class="btn secondary" href="https://github.com/jeonsky/AlcoholPrj" target="_blank" rel="noopener">GitHub 보기</a>
             </div>
+
             <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
                 <span class="pill">개발자: 하늘</span>
                 <span class="pill">역할: 기획 · 백엔드 · 프론트</span>
@@ -38,64 +44,96 @@
         </div>
     </section>
 
-    <!-- 왜 만들었나 / 무엇으로 해결했나 -->
+    <!-- 왜 만들었나 / 뭘 만들었나 -->
     <section class="two">
         <article class="panel">
-            <h3>왜 만들었나</h3>
-            <p>주류 커뮤니티는 많은데, “내 취향”인 주류 커뮤니티는 없더라 (그리고 술 좋아함 😘)</p>
-            <p>첫 버전 목표는 ‘가볍고 빠른 SSR 경험’ 검증. 카드/보드/후기를 한 뷰에 모으고 로그인 없이 흐름을 체험하게 설계.</p>
+            <h3>왜 만들었을까 ?</h3>
+            <div class="teaser">
+                <p>주류 커뮤니티는 많은데, “내 취향”인 주류 커뮤니티는 없더라 (그리고 술 좋아함 😘)</p>
+            </div>
+            <div class="more">
+                <p>첫 버전 목표는 ‘가볍고 빠른 SSR 경험’ 검증. 카드/보드/후기를 한 뷰에 모으고 로그인 없이 흐름을 체험하게 설계.</p>
+            </div>
         </article>
 
         <article class="panel">
-            <h3>무엇으로 해결했나</h3>
-            <ul style="padding-left:18px">
-                <li>Thymeleaf 서버 바인딩 → 첫 화면 즉시 노출</li>
-                <li>도메인 단순화(카드·게시판·후기)</li>
-                <li>검색/정렬/무한스크롤은 Fetch로 점진 확장</li>
-            </ul>
-            <p style="margin-top:8px">그리고… 포트폴리오 만드는 것도 가끔 힘들다! 😮‍💨</p>
+            <h3>뭘 만들었을까 ?</h3>
+            <div class="teaser">
+                <ul style="padding-left:18px">
+                    <li>Thymeleaf 서버 바인딩 → 첫 화면 즉시 노출</li>
+                    <li>도메인 단순화(카드·게시판·후기)</li>
+                    <li>검색/정렬/무한스크롤은 Fetch로 점진 확장</li>
+                </ul>
+            </div>
+            <div class="more">
+                <p>그리고… 포트폴리오 만드는 것도 가끔 힘들다! 😮‍💨</p>
+            </div>
         </article>
     </section>
 
     <!-- 내 역할/기여 & 기술 스택 -->
     <section class="two">
         <article class="panel">
-            <h3>내 역할 / 기여</h3>
-            <ul style="padding-left:18px">
-                <li>요구정의 · 화면 설계 · 라우팅 구조</li>
-                <li>도메인/엔티티 초안, 컨트롤러/뷰 연결, 타임리프 바인딩</li>
-                <li>정적 리소스 구조(css/img/js) 및 빌드/실행 흐름 정리</li>
-            </ul>
-            <p style="margin-top:8px">요즘은 최적화/정리까지 하느라 하루가 훅 간다… 🧹</p>
+            <h3>역할</h3>
+            <div class="teaser">
+                <ul style="padding-left:18px">
+                    <li>요구 정의 · 화면 설계 · 라우팅 구조</li>
+                    <li>도메인/엔티티 초안, 컨트롤러/뷰 연결, 타임리프 바인딩</li>
+                    <li>정적 리소스 구조(css/img/js) 및 빌드/실행 흐름 정리</li>
+                </ul>
+            </div>
+            <div class="more">
+                <p>요즘은 코드 정리까지 하느라 하루가 훅 간다 ,,, 🧹</p>
+            </div>
         </article>
 
-        <article class="panel">
+        <!-- 기술 스택 (예외: 팝업에 teaser 전체를 그대로 보여줌) -->
+        <article class="panel" data-modal="teaser">
             <h3>기술 스택</h3>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <div class="teaser" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
                 <span class="pill">Spring Boot</span>
                 <span class="pill">Thymeleaf(SSR)</span>
                 <span class="pill">JPA</span>
                 <span class="pill">MySQL</span>
                 <span class="pill">HTML/CSS/JS</span>
             </div>
-            <p style="margin-top:8px">초기엔 SSR로 빠르게, 상호작용은 부분 CSR로 점진 확장 💡</p>
+            <div class="more">
+                <p style="margin-top:8px">초기엔 SSR로 빠르게, 상호작용은 부분 CSR로 점진 확장 💡</p>
+            </div>
         </article>
     </section>
 
-    <!-- 로드맵 & 연락 -->
+    <!-- 회고 & 배운점 -->
     <section class="two">
         <article class="panel">
-            <h3>로드맵</h3>
-            <ul style="padding-left:18px">
-                <li>게시판/후기 페이징·정렬·검색</li>
-                <li>파일 업로드(프로필/이미지)</li>
-                <li>로그인/권한에 따른 메뉴 제어</li>
-            </ul>
-            <p style="margin-top:8px">알파→베타 전환하며 알림/프로필 커스텀도 추가 예정!</p>
+            <h3>회고 / 배운 점</h3>
+
+            <div class="teaser">
+                <ul style="padding-left:18px">
+                    <li>SSR로 초기 표시 빨라지고, 점진적 CSR로 상호작용 확장</li>
+                    <li>JPA N+1 쿼리/지연 로딩 문제를 페치 조인으로 해결</li>
+                    <li>컴포넌트/레이아웃 분리로 타임리프 템플릿 재사용성↑</li>
+                </ul>
+            </div>
+
+            <!-- 팝업에서 보여줄 전체 내용 -->
+            <div class="more">
+                <p><strong>성능/렌더링</strong> — 첫 화면을 SSR로 그리고, 이후 목록/정렬은 Fetch로 점진 로딩.
+                    불필요한 DOM 업데이트 줄이니 체감 속도 좋아짐.</p>
+                <p><strong>데이터 접근</strong> — 리스트 뷰에서 N+1 발생 → <code>fetch join</code>으로 해결.
+                    DTO 투입 구간과 엔티티 노출 구간을 분리해서 응답 안정화.</p>
+                <p><strong>템플릿 구조</strong> — 레이아웃/프래그먼트로 공통 헤더/카드 컴포넌트화.
+                    부분 변경이 쉬워지고 중복 제거됨.</p>
+                <p><strong>UX 디테일</strong> — “요약 → 팝업 디테일” 패턴으로 정보 밀도 조절.
+                    모바일에서 터치 영역 키우고 포커스 스타일 정리.</p>
+                <p><strong>아쉬운 점/다음</strong> — 이미지 업로드는 저장소 선택 이슈로 보류.
+                    이후 S3/클라우드 스토리지 + 썸네일 파이프라인 검토 예정.</p>
+            </div>
         </article>
 
-        <article class="panel">
-            <h3>연락</h3>
+        <!-- 연락: 팝업 제외 -->
+        <article class="panel no-modal">
+            <h3>Contact</h3>
             <p style="margin:8px 0 0">협업/피드백 환영! 아래 데모 버전 참고 바람 🙏</p>
             <div class="cta" style="margin-top:8px">
                 <a class="btn primary" th:href="@{/alcohol/main}">데모 열기</a>
