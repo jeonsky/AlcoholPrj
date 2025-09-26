@@ -5,13 +5,16 @@
   --muted:#213448;
   --brand:#213448;
   --card:#ECEFCA;
-  --nav:#213448; /* 네비바 전용 색상 */
 
   --btn-primary-bg: #213448;  /* 데모 버튼 배경 */
-  --btn-primary-fg: #ECEFCA;     /* 데모 버튼 글자색 */
+  --btn-primary-fg: #ECEFCA;  /* 데모 버튼 글자색 */
 
   --btn-secondary-bg: #547792;   /* 깃헙 버튼 배경 */
   --btn-secondary-fg: #ECEFCA;   /* 깃헙 버튼 글자색 */
+
+  --btn-default-bg:#fff; /* 메일 버튼 */
+  --btn-default-fg:#213448;
+  --btn-default-border:rgba(0,0,0,.18);
 
   --radius:12px;
   --gap:18px;
@@ -32,23 +35,35 @@
   border:1px solid transparent;
   transition:.2s;
 }
-
 .btn.primary{
   background: var(--btn-primary-bg);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-bg);
 }
-.btn.primary:hover{
-  opacity:.85;
-}
-
+.btn.primary:hover{ opacity:.85; }
 .btn.secondary{
   background: var(--btn-secondary-bg);
   color: var(--btn-secondary-fg);
   border:1px solid rgba(0,0,0,.2);
 }
-.btn.secondary:hover{
-  background:#f1f1f1;
+.btn.secondary:hover{ background:#f1f1f1; }
+
+/* ✅ Instagram 버튼: Contact의 데모 버튼과 동일하게 */
+.btn.ig{
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-bg);
+}
+.btn.ig:hover{ opacity:.85; }
+
+/* 기본 버튼(variant 미지정) — 메일 버튼용 */
+.btn:not(.primary):not(.secondary){
+  background:var(--btn-default-bg);
+  color:var(--btn-default-fg);
+  border:1px solid var(--btn-default-border);
+}
+.btn:not(.primary):not(.secondary):hover{
+  border-color:rgba(0,0,0,.28);
 }
 
 /* ========= Reset / Typography ========= */
@@ -69,29 +84,6 @@ img{ max-width:100%; height:auto; display:block }
 /* 선호 장치: 애니메이션 끄는 유저 배려 */
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important } }
 
-/* ========= Navbar ========= */
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background: var(--nav);
-  color:#fff;
-  box-shadow:0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.12);
-}
-.site-header .wrap{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:14px 24px;
-  max-width:var(--max);
-  margin:0 auto;
-}
-.brand{ font-weight:700; font-size:20px; letter-spacing:.2px }
-.site-header .nav{ margin-left:auto; display:flex; gap:18px; align-items:center }
-.site-header .nav a{ color:#fff; opacity:.95; font-weight:500; transition:opacity .15s,color .15s }
-.site-header .nav a:hover{ opacity:1; color:#E7F1F3; text-decoration:underline }
-@media (max-width:900px){ .site-header .wrap{ padding:12px 16px } }
-
 /* ========= Generic Layout ========= */
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad) }
 section{ margin:46px 0 }
@@ -106,7 +98,6 @@ section{ margin:46px 0 }
 }
 h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
 .lead{ margin-top:10px; color:var(--muted) }
-
 .hero-media{ display:flex; justify-content:center; align-items:center }
 .hero .avatar{
   width:clamp(240px,14vw,160px);
@@ -116,22 +107,8 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
   border:1px solid rgba(0,0,0,.08);
 }
 
-/* ========= Buttons / Pills ========= */
+/* ========= Buttons / Pills (추가 공용) ========= */
 .cta{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap }
-.btn{
-  display:inline-block;
-  padding:12px 18px;
-  border-radius:12px;
-  border:1px solid rgba(0,0,0,.12);
-  font-weight:600;
-  background:#fff;
-  color:var(--fg);
-  cursor:pointer;
-}
-.btn:hover{ border-color:rgba(0,0,0,.24) }
-.btn.primary{ background:var(--brand); color:#fff; border-color:var(--brand) }
-.btn.primary:hover{ background:var(--fg); border-color:var(--fg) }
-
 .pill{
   display:inline-block;
   padding:6px 10px;
@@ -151,7 +128,7 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
   background:var(--card);
   border:1px solid rgba(0,0,0,.10);
   box-shadow:var(--shadow-sm);
-  height:100%;                 /* grid row 높이에 맞춰 늘어남 */
+  height:100%;
   overflow:visible;
 }
 .panel h3{ margin:0 0 8px; font-size:18px; line-height:1.35; letter-spacing:.1px }
@@ -177,9 +154,7 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
 footer{ margin:56px 0 24px; text-align:center; font-size:14px; color:rgba(0,0,0,.6) }
 
 /* ========= Modal (append) ========= */
-/* 사용 시 JS에서 body.modal-open 클래스를 토글함 */
 body.modal-open{ overflow:hidden; }
-
 .modal{
   position:fixed;
   inset:0;
@@ -187,7 +162,6 @@ body.modal-open{ overflow:hidden; }
   display:none;
 }
 .modal.is-open{ display:block; }
-
 .modal__backdrop{
   position:absolute;
   inset:0;
@@ -197,7 +171,6 @@ body.modal-open{ overflow:hidden; }
   transition:opacity .22s ease;
 }
 .modal.is-open .modal__backdrop{ opacity:1; }
-
 .modal__dialog{
   position:absolute;
   top:50%;
@@ -218,8 +191,6 @@ body.modal-open{ overflow:hidden; }
   transform:translate(-50%,-50%) scale(1);
   opacity:1;
 }
-
-/* close 버튼 스타일 */
 .modal__close{
   display:inline-flex;
   align-items:center;
@@ -240,10 +211,10 @@ body.modal-open{ overflow:hidden; }
   .two{ grid-template-columns:1fr; gap:12px }
 }
 
-/* 작은 보정: 글자가 너무 길면 줄바꿈 보장 */
+/* 작은 보정 */
 .panel p, .panel li, .panel h3 { word-break:break-word; hyphens:auto; }
 
-/* 유틸: 숨김용(개발 중 필요하면 사용) */
+/* 유틸 */
 .sr-only{
   position:absolute !important;
   width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
@@ -251,14 +222,12 @@ body.modal-open{ overflow:hidden; }
 
 /* 카드에서 상세(.more)는 숨김 — 모달에는 영향 없음 */
 .wrap .two .panel.expandable .more,
-.wrap .two .panel .more{
-  display: none !important;
-}
+.wrap .two .panel .more{ display: none !important; }
 
-/* 카드에 보여줄 요약(.teaser)은 원하는 줄수로 줄이기 */
+/* 카드 요약(.teaser) 줄수 제한 */
 .wrap .two .panel .teaser{
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* ← 카드에서 보일 줄 수 조절 */
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }

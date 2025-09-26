@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>하늘 · Alcohol Prj</title>
-    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <!-- 네비바 전용 CSS -->
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <!-- 기존 공통(변수 등) -->
+    <link rel="stylesheet" th:href="@{/css/site.css}">\
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -14,7 +17,7 @@
     <div class="wrap">
         <strong class="brand">🍻 Alcohol Holic</strong>
         <nav class="nav">
-            <a th:href="@{/alcohol/main}">데모 버전 보기</a>
+            <a th:href="@{/alcohol/main}" class="demo-btn">🍺 메인으로 </a>
         </nav>
     </div>
 </header>
@@ -87,8 +90,8 @@
             </div>
         </article>
 
-        <!-- 기술 스택 (예외: 팝업에 teaser 전체를 그대로 보여줌) -->
-        <article class="panel" data-modal="teaser">
+        <!-- 기술 스택 -->
+        <article class="panel no-modal">
             <h3>기술 스택</h3>
             <div class="teaser" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
                 <span class="pill">Spring Boot</span>
@@ -96,9 +99,6 @@
                 <span class="pill">JPA</span>
                 <span class="pill">MySQL</span>
                 <span class="pill">HTML/CSS/JS</span>
-            </div>
-            <div class="more">
-                <p style="margin-top:8px">초기엔 SSR로 빠르게, 상호작용은 부분 CSR로 점진 확장 💡</p>
             </div>
         </article>
     </section>
@@ -136,8 +136,9 @@
             <h3>Contact</h3>
             <p style="margin:8px 0 0">협업/피드백 환영! 아래 데모 버전 참고 바람 🙏</p>
             <div class="cta" style="margin-top:8px">
-                <a class="btn primary" th:href="@{/alcohol/main}">데모 열기</a>
-                <a class="btn" href="mailto:hanulhari333@gmail.com">메일 보내기</a>
+                <!-- 인스타그램: 프로필 URL만 바꿔주세요 -->
+                <a class="btn ig" href="https://instagram.com/yourprofile" target="_blank" rel="noopener">Instagram</a>
+                <a class="btn" href="mailto:hanulhari333@gmail.com">메일</a>
             </div>
         </article>
     </section>

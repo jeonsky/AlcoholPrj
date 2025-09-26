@@ -1,0 +1,13 @@
+<!-- templates/fragments/nav.html -->
+<header class="site-header" th:fragment="navbar">
+    <div class="wrap">
+        <strong class="brand">🍻 Alcohol Holic</strong>
+        <nav class="nav">
+            <a th:href="@{/}">홈</a>
+            <a th:href="@{/alcohol/main}">메인</a>
+            <a th:href="@{/alcohol/board}">자유게시판</a>
+            <a th:href="@{/alcohol/tasting}">시음 후기</a>
+            <a th:href="@{/alcohol/login}">로그인</a>
+        </nav>
+    </div>
+</header>

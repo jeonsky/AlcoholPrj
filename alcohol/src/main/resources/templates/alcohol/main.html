@@ -4,25 +4,17 @@
     <meta charset="UTF-8">
     <title>주류 커뮤니티 메인</title>
 
+    <!-- 네비바 전용 CSS -->
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
     <!-- 기존 공통(변수 등) -->
     <link rel="stylesheet" th:href="@{/css/site.css}">
-    <!-- 메인 전용 스타일 -->
+    <!-- 메인 전용 CSS -->
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body class="app">
 
-<header class="app-header">
-    <div class="inner">
-        <strong class="logo">🍻 Alcohol Holic</strong>
-        <nav class="app-nav">
-            <a th:href="@{/}">홈</a>
-            <a th:href="@{/alcohol/main}" class="active">메인</a>
-            <a th:href="@{/alcohol/board}">자유게시판</a>
-            <a th:href="@{/alcohol/tasting}">시음 후기</a>
-            <a th:href="@{/alcohol/login}">로그인</a>
-        </nav>
-    </div>
-</header>
+<!-- 네비바 include -->
+<div th:replace="fragments/nav :: navbar"></div>
 
 <main class="app-wrap">
     <h2 class="section-title">추천 카드</h2>
@@ -57,7 +49,7 @@
     </div>
 </main>
 
-<!-- 랜딩용 app.js는 그대로 두고, 메인 전용 JS만 추가 -->
+<!-- JS -->
 <script th:src="@{/js/app-main.js}"></script>
 </body>
 </html>

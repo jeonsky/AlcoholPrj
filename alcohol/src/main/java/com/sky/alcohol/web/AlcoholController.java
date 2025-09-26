@@ -15,6 +15,13 @@ public class AlcoholController {
     @GetMapping("/main")
     public String main(Model model) {
         model.addAttribute("msg", "주류 커뮤니티 시작!");
-        return "alcohol/main"; // templates/alcohol/main.html
+        return "alcohol/main";
+    }
+
+    // 자유게시판
+    @GetMapping("/board")
+    public String board(Model model) {
+        model.addAttribute("msg", "자유게시판ㅋ");
+        return "alcohol/board";
     }
 }
