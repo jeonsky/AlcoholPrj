@@ -1,5 +1,6 @@
-/* ===== 메인 전용 공통 ===== */
-body.app{ background:var(--bg); color:var(--fg); }
+/* =========================
+   app.css  (App Common: cards / grids)
+   ========================= */
 
 /* 컨테이너 */
 body.app .app-wrap{
@@ -17,54 +18,54 @@ body.app .card-grid{
 
 /* 카드 */
 body.app .card{
-  background: var(--card);
+  background:var(--card);
   border:1px solid rgba(0,0,0,.08);
   border-radius:16px;
   overflow:hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
-  transform: translateY(0);
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+  transform:translateY(0);
   transition: transform .18s cubic-bezier(.2,.9,.2,1),
               box-shadow .18s ease, filter .18s ease;
   cursor:pointer;
-  outline: none;
+  outline:none;
 }
 body.app .card img{
   width:100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  aspect-ratio:16 / 10;
+  object-fit:cover;
   display:block;
 }
 body.app .card .card-body{ padding:12px 14px }
 body.app .card h3{ margin:0 0 6px; font-size:16px }
 body.app .card p{ margin:0; color:var(--muted); font-size:14px }
 
-/* 현대카드 느낌: 호버 = 살짝 상승 + 선명도 ↑ */
+/* 호버 효과 */
 body.app .card:hover{
-  transform: translateY(-8px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.18);
-  filter: saturate(1.03);
+  transform:translateY(-8px);
+  box-shadow:0 10px 22px rgba(0,0,0,.18);
+  filter:saturate(1.03);
 }
 
 /* 키보드 포커스 */
 body.app .card:focus-visible{
-  box-shadow: 0 0 0 3px rgba(255,255,255,.8),
-              0 0 0 6px rgba(20,115,230,.4),
-              0 10px 22px rgba(0,0,0,.18);
-  transform: translateY(-6px);
+  box-shadow:0 0 0 3px rgba(255,255,255,.8),
+             0 0 0 6px rgba(20,115,230,.4),
+             0 10px 22px rgba(0,0,0,.18);
+  transform:translateY(-6px);
 }
 
-/* 클릭 시 '탁' 애니메이션 */
+/* 클릭 팝 애니메이션 */
 @keyframes card-pop {
-  0%   { transform: translateY(0) }
-  55%  { transform: translateY(-14px) }
-  100% { transform: translateY(-8px) }
+  0%{   transform:translateY(0) }
+  55%{  transform:translateY(-14px) }
+  100%{ transform:translateY(-8px) }
 }
 body.app .card.pop{
   animation: card-pop .28s cubic-bezier(.2,.9,.2,1);
-  box-shadow: 0 14px 28px rgba(0,0,0,.22);
+  box-shadow:0 14px 28px rgba(0,0,0,.22);
 }
 
-/* 모바일 */
+/* 모바일 튜닝 */
 @media (max-width:540px){
   body.app .app-wrap{ margin:18px auto 64px }
   body.app .card-grid{ gap:14px }

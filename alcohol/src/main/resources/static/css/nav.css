@@ -1,96 +1,82 @@
-:root{
-  --nav-h: 56px;                 /* 헤더 높이 */
-  --nav-bg: var(--nav, #213448); /* 전역 변수 없으면 기본값 */
-  --nav-max: var(--max, 1200px); /* 내부 래퍼 최대폭 */
-}
+/* =========================
+   nav.css  (Fixed Navbar)
+   ========================= */
 
-/* 헤더가 fixed 라서 본문이 가려지지 않게 상단 패딩 부여 */
+/* 본문이 헤더에 가려지지 않게 상단 패딩 */
 body{ padding-top: var(--nav-h); }
 
-/* =========================
-   Fixed Navbar (공통 네비바)
-   ========================= */
 .site-header{
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--nav-h);
-  z-index: 1000;
-  background: var(--nav-bg);
-  color: #fff;
-  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.12);
+  position:fixed;
+  top:0; left:0; right:0;
+  height:var(--nav-h);
+  z-index:1000;
+  background:var(--nav-bg);
+  color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.12);
 }
 
-/* 내부 래퍼 */
 .site-header .wrap{
-  height: 100%;
-  max-width: var(--nav-max);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  height:100%;
+  max-width:var(--nav-max);
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  gap:16px;
 }
 
-/* 브랜드 로고 텍스트 */
 .site-header .brand{
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: .2px;
-  color: #fff;
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:.2px;
+  color:#fff;
 }
 
-/* 네비 링크 */
 .site-header .nav{
-  margin-left: auto;
-  display: flex;
-  gap: 18px;
-  align-items: center;
+  margin-left:auto;
+  display:flex;
+  gap:18px;
+  align-items:center;
 }
 
 .site-header .nav a{
-  color: #fff;
-  opacity: .95;
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity .15s, color .15s, text-decoration-color .15s, transform .15s;
+  color:#fff;
+  opacity:.95;
+  font-weight:500;
+  text-decoration:none;
+  transition:opacity .15s, color .15s, text-decoration-color .15s, transform .15s;
 }
-
 .site-header .nav a:hover{
-  opacity: 1;
-  color: #E7F1F3;
-  text-decoration: underline;
+  opacity:1;
+  color:#E7F1F3;
+  text-decoration:underline;
 }
 
-/* =========================
-   CTA: 데모 버전 보기 (오렌지 버튼)
-   .demo-btn 클래스만 해당
-   ========================= */
+/* CTA 버튼 (데모) */
 .site-header .nav a.demo-btn{
-  background: #ff9d3b;
-  color: #1c1c1c;
-  font-weight: 700;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid #d97d1e;
-  box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 4px 10px rgba(0,0,0,.18);
-  text-decoration: none;     /* 밑줄 제거 */
+  background:#ff9d3b;
+  color:#1c1c1c;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid #d97d1e;
+  box-shadow:0 1px 0 rgba(255,255,255,.3) inset, 0 4px 10px rgba(0,0,0,.18);
+  text-decoration:none;
 }
-
 .site-header .nav a.demo-btn:hover{
-  background: #ffac5a;
-  transform: translateY(-1px);
+  background:#ffac5a;
+  transform:translateY(-1px);
 }
 
-/* 반응형: 헤더 높이 & 패딩 살짝 축소 */
-@media (max-width: 900px){
-  :root{ --nav-h: 50px; }
-  .site-header .wrap{ padding: 0 16px; gap: 14px; }
-  .site-header .brand{ font-size: 18px; }
-  .site-header .nav{ gap: 14px; }
+/* 반응형 */
+@media (max-width:900px){
+  .site-header{ height:50px }
+  .site-header .wrap{ padding:0 16px; gap:14px; }
+  .site-header .brand{ font-size:18px; }
+  .site-header .nav{ gap:14px; }
 }
-
-@media (max-width: 520px){
-  :root{ --nav-h: 48px; }
-  .site-header .nav{ gap: 10px; }
-  .site-header .nav a.demo-btn{ padding: 7px 12px; border-radius: 8px; }
+@media (max-width:520px){
+  .site-header{ height:48px }
+  .site-header .nav{ gap:10px; }
+  .site-header .nav a.demo-btn{ padding:7px 12px; border-radius:8px; }
 }

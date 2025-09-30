@@ -4,44 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>하늘 · Alcohol Prj</title>
-    <!-- 네비바 전용 CSS -->
-    <link rel="stylesheet" th:href="@{/css/nav.css}">
-    <!-- 기존 공통(변수 등) -->
-    <link rel="stylesheet" th:href="@{/css/site.css}">\
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <!-- CSS: site → nav → app (순서 고정) -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
 </head>
-<body>
-<header class="site-header">
-    <div class="wrap">
-        <strong class="brand">🍻 Alcohol Holic</strong>
-        <nav class="nav">
-            <a th:href="@{/alcohol/main}" class="demo-btn">🍺 메인으로 </a>
-        </nav>
-    </div>
-</header>
+
+<body class="app page--home">
+<!-- 공통 네비 -->
+<div th:replace="fragments/nav :: navbar"></div>
 
 <main class="wrap">
     <!-- Hero -->
     <section class="hero">
         <div>
             <h1>하늘이 사이드 프로젝트 🥴</h1>
-            <p class="lead"><strong>“주류 취향을 공유하고, 시음 후기를 나누는 커뮤니티를 만들고 싶어”</strong>
-            <br>안녕하세요 👋 금융권 백엔드 개발자로 일하고 있는 하늘입니다 ☁️
-            <br></p>
+            <p class="lead">
+                <strong>“주류 취향을 공유하고, 시음 후기를 나누는 커뮤니티를 만들고 싶어”</strong><br/>
+                안녕하세요 👋 금융권 백엔드 개발자로 일하고 있는 하늘입니다 ☁️
+            </p>
 
             <div class="cta">
                 <a class="btn primary" th:href="@{/alcohol/main}">🍺 데모 바로 보기</a>
                 <a class="btn secondary" href="https://github.com/jeonsky/AlcoholPrj" target="_blank" rel="noopener">GitHub 보기</a>
             </div>
 
-            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-                <span class="pill">개발자: 하늘</span>
-                <span class="pill">역할: 기획 · 백엔드 · 프론트</span>
-                <span class="pill">형태: 개인 사이드 / 포트폴리오</span>
+            <div class="meta-pills">
+                <span class="pill"><b>개발자</b> 하늘</span>
+                <span class="pill"><b>역할</b> 기획 · 백엔드 · 프론트</span>
+                <span class="pill"><b>형태</b> 개인 사이드 / 포트폴리오</span>
             </div>
         </div>
+
         <div class="hero-media">
             <img th:src="@{/img/sky.PNG}" alt="내 사진" class="avatar" />
         </div>
@@ -90,7 +90,6 @@
             </div>
         </article>
 
-        <!-- 기술 스택 -->
         <article class="panel no-modal">
             <h3>기술 스택</h3>
             <div class="teaser" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
@@ -103,11 +102,10 @@
         </article>
     </section>
 
-    <!-- 회고 & 배운점 -->
+    <!-- 회고 & 배운점 / Contact -->
     <section class="two">
         <article class="panel">
             <h3>회고 / 배운 점</h3>
-
             <div class="teaser">
                 <ul style="padding-left:18px">
                     <li>SSR로 초기 표시 빨라지고, 점진적 CSR로 상호작용 확장</li>
@@ -115,23 +113,15 @@
                     <li>컴포넌트/레이아웃 분리로 타임리프 템플릿 재사용성↑</li>
                 </ul>
             </div>
-
-            <!-- 팝업에서 보여줄 전체 내용 -->
             <div class="more">
-                <p><strong>성능/렌더링</strong> — 첫 화면을 SSR로 그리고, 이후 목록/정렬은 Fetch로 점진 로딩.
-                    불필요한 DOM 업데이트 줄이니 체감 속도 좋아짐.</p>
-                <p><strong>데이터 접근</strong> — 리스트 뷰에서 N+1 발생 → <code>fetch join</code>으로 해결.
-                    DTO 투입 구간과 엔티티 노출 구간을 분리해서 응답 안정화.</p>
-                <p><strong>템플릿 구조</strong> — 레이아웃/프래그먼트로 공통 헤더/카드 컴포넌트화.
-                    부분 변경이 쉬워지고 중복 제거됨.</p>
-                <p><strong>UX 디테일</strong> — “요약 → 팝업 디테일” 패턴으로 정보 밀도 조절.
-                    모바일에서 터치 영역 키우고 포커스 스타일 정리.</p>
-                <p><strong>아쉬운 점/다음</strong> — 이미지 업로드는 저장소 선택 이슈로 보류.
-                    이후 S3/클라우드 스토리지 + 썸네일 파이프라인 검토 예정.</p>
+                <p><strong>성능/렌더링</strong> — 첫 화면을 SSR로 그리고, 이후 목록/정렬은 Fetch로 점진 로딩.</p>
+                <p><strong>데이터 접근</strong> — 리스트 뷰에서 N+1 발생 → <code>fetch join</code>으로 해결.</p>
+                <p><strong>템플릿 구조</strong> — 레이아웃/프래그먼트로 공통 헤더/카드 컴포넌트화.</p>
+                <p><strong>UX 디테일</strong> — “요약 → 팝업 디테일” 패턴으로 정보 밀도 조절.</p>
+                <p><strong>다음</strong> — 이미지 업로드는 이후 S3/클라우드 스토리지 + 썸네일 파이프라인 검토.</p>
             </div>
         </article>
 
-        <!-- 연락: 팝업 제외 -->
         <article class="panel no-modal">
             <h3>Contact</h3>
             <p style="margin:8px 0 0">협업/피드백 환영! 아래 데모 버전 참고 바람 🙏</p>

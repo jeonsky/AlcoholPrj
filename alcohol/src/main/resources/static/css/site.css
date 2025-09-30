@@ -1,31 +1,67 @@
-/* ========= Color Palette & Vars ========= */
+/* =========================
+   site.css  (Tokens + Reset + Base + Common UI)
+   ========================= */
+
+/* ========= Color Tokens & Global Vars ========= */
 :root{
+  /* brand palette */
   --bg:#94B4C1;
   --fg:#213448;
   --muted:#213448;
   --brand:#213448;
   --card:#ECEFCA;
 
-  --btn-primary-bg: #213448;  /* 데모 버튼 배경 */
-  --btn-primary-fg: #ECEFCA;  /* 데모 버튼 글자색 */
+  /* buttons */
+  --btn-primary-bg:#213448;
+  --btn-primary-fg:#ECEFCA;
 
-  --btn-secondary-bg: #547792;   /* 깃헙 버튼 배경 */
-  --btn-secondary-fg: #ECEFCA;   /* 깃헙 버튼 글자색 */
+  --btn-secondary-bg:#547792;
+  --btn-secondary-fg:#ECEFCA;
 
-  --btn-default-bg:#fff; /* 메일 버튼 */
+  --btn-default-bg:#fff;
   --btn-default-fg:#213448;
   --btn-default-border:rgba(0,0,0,.18);
 
+  /* layout */
   --radius:12px;
   --gap:18px;
   --max:1200px;
   --pad:clamp(16px,2vw,24px);
 
+  /* effects */
   --shadow-sm:0 2px 6px rgba(0,0,0,.08);
   --shadow-lg:0 12px 28px rgba(0,0,0,.16);
+
+  /* nav */
+  --nav-h:56px;
+  --nav-bg:var(--nav, #213448);
+  --nav-max:var(--max, 1200px);
 }
 
-/* 데모 보러 가기 & Git Hub 보기 버튼 */
+/* ========= Reset / Typography ========= */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"Archivo Black", sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a{ color:inherit; text-decoration:none }
+img{ max-width:100%; height:auto; display:block }
+:focus-visible{ outline:3px solid var(--brand); outline-offset:2px }
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation-duration:0.001ms !important; animation-iteration-count:1 !important }
+}
+
+/* ========= Generic Layout ========= */
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad) }
+section{ margin:46px 0 }
+
+/* ========= Buttons ========= */
 .btn{
   display:inline-block;
   padding:12px 18px;
@@ -36,57 +72,35 @@
   transition:.2s;
 }
 .btn.primary{
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-fg);
-  border-color: var(--btn-primary-bg);
+  background:var(--btn-primary-bg);
+  color:var(--btn-primary-fg);
+  border-color:var(--btn-primary-bg);
 }
-.btn.primary:hover{ opacity:.85; }
+.btn.primary:hover{ opacity:.85 }
+
 .btn.secondary{
-  background: var(--btn-secondary-bg);
-  color: var(--btn-secondary-fg);
+  background:var(--btn-secondary-bg);
+  color:var(--btn-secondary-fg);
   border:1px solid rgba(0,0,0,.2);
 }
-.btn.secondary:hover{ background:#f1f1f1; }
+.btn.secondary:hover{ opacity:.9 }
 
-/* ✅ Instagram 버튼: Contact의 데모 버튼과 동일하게 */
 .btn.ig{
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-fg);
-  border-color: var(--btn-primary-bg);
+  background:var(--btn-primary-bg);
+  color:var(--btn-primary-fg);
+  border-color:var(--btn-primary-bg);
 }
-.btn.ig:hover{ opacity:.85; }
+.btn.ig:hover{ opacity:.85 }
 
-/* 기본 버튼(variant 미지정) — 메일 버튼용 */
-.btn:not(.primary):not(.secondary){
+/* default (no variant) */
+.btn:not(.primary):not(.secondary):not(.ig){
   background:var(--btn-default-bg);
   color:var(--btn-default-fg);
   border:1px solid var(--btn-default-border);
 }
-.btn:not(.primary):not(.secondary):hover{
+.btn:not(.primary):not(.secondary):not(.ig):hover{
   border-color:rgba(0,0,0,.28);
 }
-
-/* ========= Reset / Typography ========= */
-*{ box-sizing:border-box }
-html,body{ height:100% }
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
-  font-family: "Archivo Black", sans-serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-a{ color:inherit; text-decoration:none }
-:focus-visible{ outline:3px solid var(--brand); outline-offset:2px }
-img{ max-width:100%; height:auto; display:block }
-
-/* 선호 장치: 애니메이션 끄는 유저 배려 */
-@media (prefers-reduced-motion: reduce){ *{ transition:none !important } }
-
-/* ========= Generic Layout ========= */
-.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad) }
-section{ margin:46px 0 }
 
 /* ========= Hero ========= */
 .hero{
@@ -107,8 +121,13 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
   border:1px solid rgba(0,0,0,.08);
 }
 
-/* ========= Buttons / Pills (추가 공용) ========= */
-.cta{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap }
+/* === Hero: Meta Pills (흰색 박스) === */
+.hero .meta-pills{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
 .pill{
   display:inline-block;
   padding:6px 10px;
@@ -116,9 +135,11 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
   border-radius:999px;
   background:#fff;
   font-size:14px;
+  box-shadow:var(--shadow-sm);
 }
+.hero .meta-pills .pill b{ opacity:.75; margin-right:6px }
 
-/* ========= Panels (Equal Height Only) ========= */
+/* ========= Panels ========= */
 .panel{
   display:flex;
   flex-direction:column;
@@ -136,98 +157,66 @@ h1{ font-size:clamp(28px,4vw,44px); line-height:1.15; margin:0 }
 .panel ul{ margin:0; padding-left:18px }
 .panel li{ margin:6px 0 }
 .panel .cta{ display:flex; gap:10px; flex-wrap:wrap }
+.panel.expandable{ cursor:default; transition:none }
+.panel.expandable .more{ margin-top:8px; max-height:none; overflow:visible; transition:none }
 
-/* ========= 2열 레이아웃 ========= */
+/* ========= Two Columns ========= */
 .two{
   display:grid;
   gap:var(--gap);
   grid-template-columns:1fr 1fr;
-  align-items:stretch;          /* 같은 행은 같은 높이 */
+  align-items:stretch;
 }
 .two > *{ align-self:stretch }
-
-/* ========= Disable expandable visuals ========= */
-.panel.expandable{ cursor:default; transition:none }
-.panel.expandable .more{ margin-top:8px; max-height:none; overflow:visible; transition:none }
 
 /* ========= Footer ========= */
 footer{ margin:56px 0 24px; text-align:center; font-size:14px; color:rgba(0,0,0,.6) }
 
-/* ========= Modal (append) ========= */
+/* ========= Modal ========= */
 body.modal-open{ overflow:hidden; }
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-}
+.modal{ position:fixed; inset:0; z-index:9999; display:none; }
 .modal.is-open{ display:block; }
 .modal__backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(2px);
-  opacity:0;
-  transition:opacity .22s ease;
+  position:absolute; inset:0; background:rgba(0,0,0,.45);
+  backdrop-filter:blur(2px); opacity:0; transition:opacity .22s ease;
 }
 .modal.is-open .modal__backdrop{ opacity:1; }
 .modal__dialog{
-  position:absolute;
-  top:50%;
-  left:50%;
+  position:absolute; top:50%; left:50%;
   transform:translate(-50%,-46%) scale(.98);
   max-width:min(820px, calc(100vw - 32px));
   max-height:calc(100vh - 32px);
   overflow:auto;
-  background:var(--card);
-  color:var(--fg);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow-lg);
-  padding:20px;
-  opacity:0;
+  background:var(--card); color:var(--fg);
+  border-radius:var(--radius); box-shadow:var(--shadow-lg);
+  padding:20px; opacity:0;
   transition:transform .24s cubic-bezier(.2,.9,.2,1), opacity .24s ease;
 }
-.modal.is-open .modal__dialog{
-  transform:translate(-50%,-50%) scale(1);
-  opacity:1;
-}
+.modal.is-open .modal__dialog{ transform:translate(-50%,-50%) scale(1); opacity:1; }
 .modal__close{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:36px;
-  height:36px;
-  border-radius:999px;
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;
-  cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px;
+  border:1px solid rgba(0,0,0,.12); background:#fff; cursor:pointer;
 }
 .modal__content > * + *{ margin-top:12px }
 
-/* 모바일 대응 */
+/* ========= Mobile ========= */
 @media (max-width:600px){
   .modal__dialog{ padding:16px; max-width:calc(100vw - 20px); max-height:calc(100vh - 20px) }
   .hero{ grid-template-columns:1fr; gap:10px }
   .two{ grid-template-columns:1fr; gap:12px }
 }
 
-/* 작은 보정 */
+/* ========= Utilities ========= */
 .panel p, .panel li, .panel h3 { word-break:break-word; hyphens:auto; }
-
-/* 유틸 */
 .sr-only{
   position:absolute !important;
   width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
 }
 
-/* 카드에서 상세(.more)는 숨김 — 모달에는 영향 없음 */
+/* 카드에서 상세(.more) 숨김 — 모달엔 영향 없음 */
 .wrap .two .panel.expandable .more,
-.wrap .two .panel .more{ display: none !important; }
+.wrap .two .panel .more{ display:none !important; }
 
-/* 카드 요약(.teaser) 줄수 제한 */
-.wrap .two .panel .teaser{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
+/* Optional: active nav link helper */
+.nav a.is-active{ font-weight:700; text-decoration:underline; }

@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>하늘 - 글쓰기</title>
+
+    <!-- 폰트: 페이지 간 동일 렌더링용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+
+    <!-- 페이지 전용 최소 스타일 (파일 분리 원하면 /css/write.css로 빼도 됨) -->
+    <style>
+        body.app.write .write-wrap{ max-width:860px; margin:26px auto 80px; padding:0 var(--pad); }
+        body.app.write .write-title{ margin:12px 0 14px; font-size:22px; }
+
+        body.app.write form{
+          display:grid; gap:14px;
+          background:var(--card);
+          border:1px solid rgba(0,0,0,.08);
+          border-radius:14px;
+          box-shadow:var(--shadow-sm);
+          padding:16px;
+        }
+        body.app.write input[type="text"],
+        body.app.write textarea{
+          width:100%;
+          border:1px solid rgba(0,0,0,.15);
+          border-radius:10px;
+          padding:10px 12px;
+          background:#fff;
+          font: inherit;
+        }
+        body.app.write textarea{ min-height:260px; resize:vertical; }
+
+        body.app.write .write-actions{
+          display:flex; gap:10px; justify-content:flex-end; margin-top:6px;
+        }
+        body.app.write .btn-submit{
+          background: var(--btn-primary-bg);
+          color: var(--btn-primary-fg);
+          border:1px solid var(--btn-primary-bg);
+          padding:10px 14px; border-radius:12px; font-weight:600; cursor:pointer; transition:.2s;
+        }
+        body.app.write .btn-submit:hover{ opacity:.9; transform: translateY(-1px); }
+        body.app.write .btn-cancel{
+          background:var(--btn-default-bg);
+          color:var(--btn-default-fg);
+          border:1px solid var(--btn-default-border);
+          padding:10px 14px; border-radius:12px; font-weight:600; cursor:pointer; transition:.2s; text-decoration:none;
+        }
+        body.app.write .btn-cancel:hover{ border-color:rgba(0,0,0,.28); }
+    </style>
+</head>
+
+<body class="app write">
+<!-- 공통 네비 -->
+<div th:replace="fragments/nav :: navbar"></div>
+
+<main class="write-wrap">
+    <h1 class="write-title">글쓰기</h1>
+
+    <!-- 서버 바인딩 준비: action만 맞춰두고 name 속성으로 전달 -->
+    <form th:action="@{/alcohol/write}" method="post">
+        <label class="sr-only" for="title">제목</label>
+        <input id="title" name="title" type="text" placeholder="제목" required />
+
+        <label class="sr-only" for="content">내용</label>
+        <textarea id="content" name="content" rows="12" placeholder="내용" required></textarea>
+
+        <div class="write-actions">
+            <button class="btn-submit" type="submit">등록 📓</button>
+            <a class="btn-cancel" th:href="@{/alcohol/board}">취소 ❌</a>
+        </div>
+    </form>
+</main>
+
+<script th:src="@{/js/app-main.js}"></script>
+</body>📓
+</html>

@@ -1,19 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>주류 커뮤니티 메인</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>하늘 - 자유게시판</title>
 
-    <!-- 네비바 전용 CSS -->
-    <link rel="stylesheet" th:href="@{/css/nav.css}">
-    <!-- 기존 공통(변수 등) -->
-    <link rel="stylesheet" th:href="@{/css/site.css}">
-    <!-- 메인 전용 스타일 -->
-    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <!-- 폰트: 페이지 간 동일 렌더링용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <!-- CSS: 토큰/베이스 → 네비 → 앱공통 (순서 고정) -->
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+    <!-- (선택) 보드 전용이 있으면 마지막에 추가: <link rel="stylesheet" th:href="@{/css/board.css}" /> -->
 </head>
-<body class="board">
-<!-- 네비바 include -->
+
+<body class="app board">
+<!-- 공통 네비 -->
 <div th:replace="fragments/nav :: navbar"></div>
+
+<main class="board-wrap wrap" style="margin:26px auto 80px;">
+    <div class="board-header" style="display:flex;align-items:center;justify-content:space-between;margin:12px 0 14px;">
+        <h1 class="board-title" style="margin:0;font-size:22px;">자유게시판</h1>
+        <a class="btn primary" th:href="@{/alcohol/write}">글쓰기</a>
+    </div>
+
+    <!-- 글 목록 -->
+    <ul class="post-list" style="display:grid;gap:12px;grid-template-columns:1fr;">
+        <!-- 실제 데이터 바인딩 -->
+        <li class="post-item"
+            style="background:var(--card);border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:var(--shadow-sm);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;transition:.16s;"
+            th:each="p : ${posts}">
+            <a class="title" th:href="@{|/alcohol/board/${p.id}|}" th:text="${p.title}"
+               style="font-weight:700;font-size:16px;margin-right:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">제목</a>
+            <span class="meta" style="color:var(--muted);font-size:14px;white-space:nowrap;">
+          <span th:text="${p.author}">작성자</span> ·
+          <span th:text="${#temporals.format(p.createdAt, 'yyyy.MM.dd HH:mm')}">날짜</span> ·
+          조회 <span th:text="${p.views}">0</span>
+        </span>
+        </li>
+
+        <!-- 데이터 없을 때 -->
+        <li th:if="${posts == null or #lists.isEmpty(posts)}"
+            style="background:var(--card);border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:var(--shadow-sm);padding:18px 16px;">
+            첫 글을 남겨봐! ✍️
+        </li>
+    </ul>
+
+    <!-- (선택) 페이지네이션 -->
+    <nav class="pager" th:if="${posts != null and posts.totalPages > 1}" style="display:flex;gap:10px;align-items:center;justify-content:center;margin-top:16px;">
+        <a th:if="${posts.hasPrevious()}" th:href="@{/alcohol/board(page=${posts.number - 1})}" class="btn">이전</a>
+        <span th:text="${posts.number + 1}">1</span>/<span th:text="${posts.totalPages}">1</span>
+        <a th:if="${posts.hasNext()}" th:href="@{/alcohol/board(page=${posts.number + 1})}" class="btn">다음</a>
+    </nav>
+</main>
 
 <script th:src="@{/js/app-main.js}"></script>
 </body>
