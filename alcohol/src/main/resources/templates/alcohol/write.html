@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>하늘 - 글쓰기</title>
+    <title>하늘 - 자유게시판 작성</title>
 
     <!-- 폰트: 페이지 간 동일 렌더링용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +14,6 @@
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
     <link rel="stylesheet" th:href="@{/css/app.css}" />
 
-    <!-- 페이지 전용 최소 스타일 (파일 분리 원하면 /css/write.css로 빼도 됨) -->
     <style>
         body.app.write .write-wrap{ max-width:860px; margin:26px auto 80px; padding:0 var(--pad); }
         body.app.write .write-title{ margin:12px 0 14px; font-size:22px; }
@@ -59,27 +58,26 @@
 </head>
 
 <body class="app write">
-<!-- 공통 네비 -->
+
 <div th:replace="fragments/nav :: navbar"></div>
 
 <main class="write-wrap">
     <h1 class="write-title">글쓰기</h1>
 
-    <!-- 서버 바인딩 준비: action만 맞춰두고 name 속성으로 전달 -->
+    <!-- write.html -->
     <form th:action="@{/alcohol/write}" method="post">
-        <label class="sr-only" for="title">제목</label>
-        <input id="title" name="title" type="text" placeholder="제목" required />
-
-        <label class="sr-only" for="content">내용</label>
-        <textarea id="content" name="content" rows="12" placeholder="내용" required></textarea>
+        <input name="title" type="text" placeholder="제목" required>
+        <input name="author" type="text" placeholder="작성자" required>
+        <textarea name="content" rows="12" placeholder="내용" required></textarea>
 
         <div class="write-actions">
-            <button class="btn-submit" type="submit">등록 📓</button>
-            <a class="btn-cancel" th:href="@{/alcohol/board}">취소 ❌</a>
+            <button class="btn-submit" type="submit">등록 📔</button>
+            <a class="btn-cancel" th:href="@{/alcohol/board}">취소 🍪</a>
         </div>
     </form>
+
 </main>
 
-<script th:src="@{/js/app-main.js}"></script>
+<script th:src="@{/js/app.js}" defer></script>
 </body>📓
 </html>

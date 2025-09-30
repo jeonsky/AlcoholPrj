@@ -22,6 +22,9 @@ public class Alcohol {
     @Column(nullable = false, length = 200)
     private String title;
 
+    @Column(columnDefinition = "TEXT")   // 내용 길면 TEXT가 편함
+    private String content;
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -29,11 +32,21 @@ public class Alcohol {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Alcohol(String title) {
+    public Alcohol(String title, String content) {
         this.title = title;
+        this.content = content;
     }
 
-    public void changeTitle(String title) {
+    @Column(nullable = false, length = 40)
+    private String author;
+
+    public Alcohol(String title, String content, String author) {
         this.title = title;
+        this.content = content;
+        this.author = author;
     }
+
+    public void changeAuthor(String author) { this.author = author; }
+    public void changeTitle(String title) { this.title = title; }
+    public void changeContent(String content) { this.content = content; }
 }

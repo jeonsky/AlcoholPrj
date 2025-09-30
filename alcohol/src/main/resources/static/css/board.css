@@ -1,0 +1,49 @@
+/* ===== Board Grid ===== */
+body.app.board .board-wrap{ max-width:var(--max); margin:26px auto 80px; padding:0 var(--pad); }
+body.app.board .board-header{ display:flex; align-items:center; justify-content:space-between; margin:12px 0 14px; }
+body.app.board .board-title{ margin:0; font-size:22px }
+
+/* 메인 카드 그리드와 동일한 느낌 */
+body.app.board .post-grid{
+  display:grid; gap:16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* 카드 */
+body.app.board .post-card{
+  display:block;             /* a를 카드처럼 */
+  background: var(--card);
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow: var(--shadow-sm);
+  padding:12px 14px;
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, filter .18s ease;
+  text-decoration:none;      /* 링크 밑줄 제거 */
+  color:inherit;             /* 글자색 유지 */
+}
+body.app.board .post-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  filter: saturate(1.02);
+}
+body.app.board .post-title{
+  display:block;
+  font-weight:800; font-size:16px; margin:0 0 6px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  color:var(--fg); text-decoration:none;
+}
+body.app.board .post-author{
+  font-size:13px; color:rgba(0,0,0,.55);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* 빈 상태 */
+body.app.board .empty{
+  background: var(--card);
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:16px;
+  box-shadow: var(--shadow-sm);
+  padding:18px 16px;
+  text-align:center; font-weight:600;
+}
