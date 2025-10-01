@@ -1,6 +1,7 @@
 package com.sky.alcohol.web;
 
 import com.sky.alcohol.app.AlcoholService;
+import com.sky.alcohol.app.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,51 +12,88 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/alcohol")
 public class AlcoholController {
 
-    private final AlcoholService alcoholService; // ← final로 주입
+    private final AlcoholService alcoholService;  // 자유게시판
+    private final ReviewService reviewService;    // 시음 후기
 
+    // ===== 메인 =====
     @GetMapping("/main")
     public String main(Model model) {
         model.addAttribute("msg", "주류 커뮤니티 시작!");
         return "alcohol/main";
     }
 
-    // 목록 조회해서 모델에 넣기
+    // ===== 자유게시판 =====
     @GetMapping("/board")
     public String board(Model model) {
-        var posts = alcoholService.findAllDesc(); // 최신순
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", alcoholService.findAllDesc());
         return "alcohol/board";
     }
 
-    // 글쓰기 페이지
+    @GetMapping("/board/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        model.addAttribute("post", alcoholService.getOne(id));
+        return "alcohol/detail";
+    }
+
+    // 글쓰기 폼(자유게시판) - write.html 재사용
     @GetMapping("/write")
     public String write(Model model) {
-        model.addAttribute("msg", "글쓰기 ㅋ");
+        model.addAttribute("action", "/alcohol/write");     // POST 타깃
+        model.addAttribute("back",   "/alcohol/board");     // 목록 버튼
+        model.addAttribute("titleText", "자유게시판 글쓰기");
         return "alcohol/write";
     }
 
-    // 글쓰기 저장
+    // 글 저장(자유게시판)
     @PostMapping("/write")
-    public String writeForm(@RequestParam("title") String title,
-                            @RequestParam("content") String content,
-                            @RequestParam("author") String author) {
+    public String writeForm(@RequestParam String title,
+                            @RequestParam String content,
+                            @RequestParam String author) {
         alcoholService.write(title, content, author);
         return "redirect:/alcohol/board";
     }
 
-    // 시음 후기
+    // ===== 시음 후기 =====
     @GetMapping("/review")
     public String review(Model model) {
-        model.addAttribute("msg", "시음 후기 ㅋ");
+        model.addAttribute("posts", reviewService.findAllDesc());
         return "alcohol/review";
     }
 
-    // 글 상세 내용
-    @GetMapping("/board/{id}")
-    public String detail(@PathVariable("id") Long id, Model model) {
-        var post = alcoholService.getOne(id);
-        model.addAttribute("post", post);
-        return "alcohol/detail";
+    @GetMapping("/review/{id}")
+    public String reviewDetail(@PathVariable Long id, Model model) {
+        model.addAttribute("post", reviewService.getOne(id));
+        return "alcohol/review-detail";
     }
 
+    // 글쓰기 폼(시음 후기) - write.html 재사용
+    @GetMapping("/review/write")
+    public String reviewWrite(Model model) {
+        model.addAttribute("action", "/alcohol/review/write"); // POST 타깃
+        model.addAttribute("back",   "/alcohol/review");       // 목록 버튼
+        model.addAttribute("titleText", "시음 후기 글쓰기");
+        return "alcohol/write";
+    }
+
+    // 글 저장(시음 후기)
+    @PostMapping("/review/write")
+    public String reviewWriteForm(@RequestParam String title,
+                                  @RequestParam String content,
+                                  @RequestParam String author) {
+        reviewService.write(title, content, author);
+        return "redirect:/alcohol/review";
+    }
+
+    // ===== 삭제 =====
+    @DeleteMapping("/board/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        alcoholService.delete(id);
+        return "redirect:/alcohol/board";
+    }
+
+    @DeleteMapping("/review/{id}")
+    public String deleteReview(@PathVariable Long id) {
+        reviewService.delete(id);
+        return "redirect:/alcohol/review";
+    }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>하늘 - 자유게시판 작성</title>
+    <title>하늘 - 글 작성</title>
 
     <!-- 폰트: 페이지 간 동일 렌더링용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,10 +62,8 @@
 <div th:replace="fragments/nav :: navbar"></div>
 
 <main class="write-wrap">
-    <h1 class="write-title">글쓰기</h1>
-
-    <!-- write.html -->
-    <form th:action="@{/alcohol/write}" method="post">
+    <h1 th:text="${titleText ?: '글쓰기'}">글쓰기</h1>
+    <form th:action="@{${action} ?: '/alcohol/write'}" method="post" class="write-form">
         <input name="title" type="text" placeholder="제목" required>
         <input name="author" type="text" placeholder="작성자" required>
         <textarea name="content" rows="12" placeholder="내용" required></textarea>
@@ -79,5 +77,5 @@
 </main>
 
 <script th:src="@{/js/app.js}" defer></script>
-</body>📓
+</body>
 </html>

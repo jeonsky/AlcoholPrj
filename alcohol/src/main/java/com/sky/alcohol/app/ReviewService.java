@@ -1,7 +1,7 @@
 package com.sky.alcohol.app;
 
-import com.sky.alcohol.domain.Alcohol;
-import com.sky.alcohol.domain.AlcoholRepository;
+import com.sky.alcohol.domain.Review;
+import com.sky.alcohol.domain.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -13,29 +13,29 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AlcoholService {
+public class ReviewService {
 
-    private final AlcoholRepository alcoholRepository;
+    private final ReviewRepository reviewRepository;
 
     @Transactional(readOnly = true)
-    public List<Alcohol> findAllDesc() {
-        return alcoholRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    public List<Review> findAllDesc() {
+        return reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     @Transactional
     public Long write(String title, String content, String author) {
-        return alcoholRepository.save(new Alcohol(title, content, author)).getId();
+        return reviewRepository.save(new Review(title, content, author)).getId();
     }
 
     @Transactional(readOnly = true)
-    public Alcohol getOne(Long id) {
-        return alcoholRepository.findById(id)
+    public Review getOne(Long id) {
+        return reviewRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public void delete(Long id) {
-        var post = alcoholRepository.findById(id)
+        var post = reviewRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        alcoholRepository.delete(post);
+        reviewRepository.delete(post);
     }
 }

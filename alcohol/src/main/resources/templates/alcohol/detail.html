@@ -41,11 +41,13 @@
         </div>
         <div class="post-content" th:text="${post.content}">내용</div>
 
-
         <div class="actions">
             <a class="btn" th:href="@{/alcohol/board}">목록</a>
-            <!-- 추후 수정/삭제 붙일 자리 -->
-            <!-- <a class="btn primary" th:href="@{|/alcohol/board/${post.id}/edit|}">수정</a> -->
+            <a class="btn" th:href="@{|/alcohol/board/${post.id}/edit|}">수정</a>
+            <form th:action="@{|/alcohol/board/${post.id}|}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="btn primary" type="submit">삭제</button>
+            </form>
         </div>
     </article>
 </main>
