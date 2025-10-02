@@ -84,7 +84,7 @@ public class AlcoholController {
         return "redirect:/alcohol/review";
     }
 
-    // ===== 삭제 =====
+    // 글 삭제
     @DeleteMapping("/board/{id}")
     public String deleteBoard(@PathVariable Long id) {
         alcoholService.delete(id);
