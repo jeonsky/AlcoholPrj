@@ -61,9 +61,10 @@
 
 <div th:replace="fragments/nav :: navbar"></div>
 
-<main class="write-wrap">
-    <h1 th:text="${titleText ?: '글쓰기'}">글쓰기</h1>
-    <form th:action="@{${action} ?: '/alcohol/write'}" method="post" class="write-form">
+<main class="write-wrap" th:with="act=${action} ?: '/alcohol/write'">
+    <h1 th:text="${titleText} ?: '글쓰기'">글쓰기</h1>
+
+    <form th:action="@{${act}}" method="post" class="write-form">
         <input name="title" type="text" placeholder="제목" required>
         <input name="author" type="text" placeholder="작성자" required>
         <textarea name="content" rows="12" placeholder="내용" required></textarea>
@@ -73,7 +74,6 @@
             <a class="btn-cancel" th:href="@{/alcohol/board}">취소 🍪</a>
         </div>
     </form>
-
 </main>
 
 <script th:src="@{/js/app.js}" defer></script>

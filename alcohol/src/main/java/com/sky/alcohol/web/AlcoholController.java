@@ -46,14 +46,14 @@ public class AlcoholController {
 
     // 글 저장(자유게시판)
     @PostMapping("/write")
-    public String writeForm(@RequestParam String title,
-                            @RequestParam String content,
-                            @RequestParam String author) {
+    public String writeForm(@RequestParam("title") String title,
+                            @RequestParam("content") String content,
+                            @RequestParam("author") String author) {
         alcoholService.write(title, content, author);
         return "redirect:/alcohol/board";
     }
 
-    // ===== 시음 후기 =====
+    // 시음 후기
     @GetMapping("/review")
     public String review(Model model) {
         model.addAttribute("posts", reviewService.findAllDesc());
@@ -77,9 +77,9 @@ public class AlcoholController {
 
     // 글 저장(시음 후기)
     @PostMapping("/review/write")
-    public String reviewWriteForm(@RequestParam String title,
-                                  @RequestParam String content,
-                                  @RequestParam String author) {
+    public String reviewWriteForm(@RequestParam("title") String title,
+                                  @RequestParam("content") String content,
+                                  @RequestParam("author") String author) {
         reviewService.write(title, content, author);
         return "redirect:/alcohol/review";
     }
