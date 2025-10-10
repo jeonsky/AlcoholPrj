@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>도자기 굿즈</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+</head>
+<body class="app">
+
+<!-- 네비바 -->
+<div th:replace="fragments/nav :: navbar"></div>
+
+<main class="app-wrap">
+
+    <!-- 제목 pill -->
+    <div class="pill-wrap">
+        <span class="pill-box pill-title">도자기 굿즈 ☁️</span>
+    </div>
+
+    <!-- 설명 pill -->
+    <div class="pill-wrap">
+      <span class="pill-box pill-desc">
+        운영자가 직접 만든 도자기입니다 🍶 술을 좋아해서 직접 사용할 용도로 만들었으니
+        마음에 드는 거 가져가세요 🥰 직접 만든 상품이라 재고가 하나 뿐입니다
+      </span>
+    </div>
+
+    <!-- 칩(태그) — 전역 meta-pills 사용 -->
+    <div class="meta-pills">
+        <span class="pill"><b>만든이</b> 하늘</span>
+        <span class="pill">핸드메이드</span>
+        <span class="pill">소량 제작</span>
+    </div>
+
+    <!-- 카드 그리드 -->
+    <div class="card-grid" style="margin-top:14px">
+        <!-- 서버 데이터 -->
+        <div class="card" th:each="c : ${cards}" role="button" tabindex="0">
+            <img th:src="${c.imageUrl}" th:alt="${c.title}">
+            <div class="card-body">
+                <h3 th:text="${c.title}">상품명</h3>
+                <p th:text="${c.subtitle}">설명</p>
+                <div class="meta-pills" th:if="${c.tags != null}">
+                    <span class="pill" th:each="t : ${c.tags}" th:text="${t}">태그</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 임시 카드 -->
+        <div class="card" role="button" tabindex="0">
+            <img th:src="@{/img/sake.jpg}" alt="사케잔">
+            <div class="card-body">
+                <h3>사케잔</h3>
+                <p>무광 백자 · 한정 수량</p>
+                <div class="meta-pills">
+                    <span class="pill">무광 백자</span>
+                    <span class="pill">한정</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" role="button" tabindex="0">
+            <img th:src="@{/img/cup.jpg}" alt="고블렛잔">
+            <div class="card-body">
+                <h3>고블렛잔</h3>
+                <p>매트한 마감 · 각인 선택</p>
+                <div class="meta-pills">
+                    <span class="pill">매트 유약</span>
+                    <span class="pill">각인 옵션</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" role="button" tabindex="0">
+            <img th:src="@{/img/soft.jpg}" alt="소프트컵">
+            <div class="card-body">
+                <h3>소프트컵</h3>
+                <p>320ml · 라이트 그레이</p>
+                <div class="meta-pills">
+                    <span class="pill">320ml</span>
+                    <span class="pill">라이트 그레이</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" role="button" tabindex="0">
+            <img th:src="@{/img/plate.jpg}" alt="디저트 플레이트">
+            <div class="card-body">
+                <h3>디저트 플레이트</h3>
+                <p>180mm · 매트 유약</p>
+                <div class="meta-pills">
+                    <span class="pill">180mm</span>
+                    <span class="pill">매트 유약</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/app.js}" defer></script>
+<script th:src="@{/js/app-main.js}" defer></script>
+</body>
+</html>

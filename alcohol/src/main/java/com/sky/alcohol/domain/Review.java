@@ -1,4 +1,3 @@
-// src/main/java/com/sky/alcohol/domain/Review.java
 package com.sky.alcohol.domain;
 
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-// /static/js/app-main.js  — /alcohol/main 에서만 로드
+// alcohol/main 에서만 로드
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('body.app .card-grid');
   if (!grid) return; // 메인 아니면 즉시 종료
