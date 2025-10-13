@@ -1,7 +1,3 @@
-/* =========================
-   app.css  (App Common: cards / grids)
-   ========================= */
-
 /* 컨테이너 */
 body.app .app-wrap{
   max-width:var(--max);

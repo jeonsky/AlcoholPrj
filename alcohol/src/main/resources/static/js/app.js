@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // --- 패널 equal-height (index의 .two 섹션이 있을 때만) ---
+  // 패널 equal-height (index의 .two 섹션이 있을 때만)
   const sections = $$('.two');
   const hasPanels = sections.length > 0;
   const equalize = (section) => {
