@@ -38,8 +38,8 @@ public class AlcoholController {
     // 글쓰기 폼(자유게시판) - write.html 재사용
     @GetMapping("/write")
     public String write(Model model) {
-        model.addAttribute("action", "/alcohol/write");     // POST 타깃
-        model.addAttribute("back",   "/alcohol/board");     // 목록 버튼
+        model.addAttribute("action", "/alcohol/write");     // POST
+        model.addAttribute("back",   "/alcohol/board");     // 목록
         model.addAttribute("titleText", "자유게시판 글쓰기");
         return "alcohol/write";
     }
