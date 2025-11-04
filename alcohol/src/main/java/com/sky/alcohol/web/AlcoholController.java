@@ -101,7 +101,6 @@ public class AlcoholController {
     @GetMapping("/goods")
     public String goods(Model model) {
         model.addAttribute("titleText", "도자기 굿즈");
-        // TODO: 추후 DB 연동. 지금은 화면만 확인
         return "alcohol/goods";
     }
 }
