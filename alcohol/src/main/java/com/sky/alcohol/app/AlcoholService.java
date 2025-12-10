@@ -38,4 +38,13 @@ public class AlcoholService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         alcoholRepository.delete(post);
     }
+
+    @Transactional
+    public void update(Long id, String title, String content, String author) {
+        var post = alcoholRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        post.change(title, content, author);
+    }
+
 }

@@ -31,6 +31,7 @@ public class ReviewService {
     public Review getOne(Long id) {
         return reviewRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
     }
 
     public void delete(Long id) {

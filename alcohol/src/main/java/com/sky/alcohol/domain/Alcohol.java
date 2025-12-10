@@ -49,4 +49,11 @@ public class Alcohol {
     public void changeAuthor(String author) { this.author = author; }
     public void changeTitle(String title) { this.title = title; }
     public void changeContent(String content) { this.content = content; }
+
+    public void change(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
+
 }

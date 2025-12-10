@@ -15,14 +15,14 @@ public class AlcoholController {
     private final AlcoholService alcoholService;  // 자유게시판
     private final ReviewService reviewService;    // 시음 후기
 
-    // ===== 메인 =====
+    // 메인
     @GetMapping("/main")
     public String main(Model model) {
         model.addAttribute("msg", "주류 커뮤니티 시작!");
         return "alcohol/main";
     }
 
-    // ===== 자유게시판 =====
+    // 자유게시판
     @GetMapping("/board")
     public String board(Model model) {
         model.addAttribute("posts", alcoholService.findAllDesc());
@@ -30,7 +30,7 @@ public class AlcoholController {
     }
 
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable Long id, Model model) {
+    public String detail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", alcoholService.getOne(id));
         return "alcohol/detail";
     }
@@ -61,7 +61,7 @@ public class AlcoholController {
     }
 
     @GetMapping("/review/{id}")
-    public String reviewDetail(@PathVariable Long id, Model model) {
+    public String reviewDetail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", reviewService.getOne(id));
         return "alcohol/review-detail";
     }
@@ -84,15 +84,15 @@ public class AlcoholController {
         return "redirect:/alcohol/review";
     }
 
-    // 글 삭제
+    // ===== 글 삭제 =====
     @DeleteMapping("/board/{id}")
-    public String deleteBoard(@PathVariable Long id) {
+    public String deleteBoard(@PathVariable("id") Long id) {
         alcoholService.delete(id);
         return "redirect:/alcohol/board";
     }
 
     @DeleteMapping("/review/{id}")
-    public String deleteReview(@PathVariable Long id) {
+    public String deleteReview(@PathVariable("id") Long id) {
         reviewService.delete(id);
         return "redirect:/alcohol/review";
     }
@@ -102,5 +102,27 @@ public class AlcoholController {
     public String goods(Model model) {
         model.addAttribute("titleText", "도자기 굿즈");
         return "alcohol/goods";
+    }
+
+    // 수정 폼 (기존 글 불러와서 write.html 재사용)
+    @GetMapping("/board/{id}/edit")
+    public String editBoard(@PathVariable("id") Long id, Model model) {
+        var post = alcoholService.getOne(id);
+
+        model.addAttribute("post", post);
+        model.addAttribute("action", "/alcohol/board/" + id + "/edit"); // 수정 POST 타깃
+        model.addAttribute("back",   "/alcohol/board");                 // 목록
+        model.addAttribute("titleText", "자유게시판 글 수정");
+        return "alcohol/write"; // 같은 폼 재사용
+    }
+
+    // 수정 처리
+    @PostMapping("/board/{id}/edit")
+    public String editBoardForm(@PathVariable("id") Long id,
+                                @RequestParam String title,
+                                @RequestParam String content,
+                                @RequestParam String author) {
+        alcoholService.update(id, title, content, author);
+        return "redirect:/alcohol/board/" + id;
     }
 }
