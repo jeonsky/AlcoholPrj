@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${post.title}">게시글</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+
+    <style>
+        body.app.detail .post-wrap{ max-width:var(--max); margin:26px auto 80px; padding:0 var(--pad); }
+        body.app.detail .post-card{
+          background:var(--card); border:1px solid rgba(0,0,0,.10); border-radius:14px;
+          box-shadow:var(--shadow-sm); padding:18px;
+        }
+        body.app.detail .post-title{ margin:0 0 8px; font-size:22px; font-weight:800; }
+        body.app.detail .post-meta{ font-size:13px; color:rgba(0,0,0,.55); margin-bottom:14px }
+        body.app.detail .post-content{ white-space:pre-wrap; line-height:1.6; font-size:15px }
+        body.app.detail .actions{ margin-top:16px; display:flex; gap:10px }
+        .btn{ display:inline-block; padding:10px 14px; border-radius:12px; font-weight:700; border:1px solid var(--btn-default-border); background:var(--btn-default-bg); color:var(--btn-default-fg); }
+        .btn.primary{ background:var(--btn-primary-bg); color:var(--btn-primary-fg); border-color:var(--btn-primary-bg); }
+    </style>
+</head>
+<body class="app detail">
+<div th:replace="fragments/nav :: navbar"></div>
+
+<main class="post-wrap">
+    <article class="post-card">
+        <!-- alcohol/review-detail.html (핵심만) -->
+        <h1 class="post-title" th:text="${post.title}">제목</h1>
+        <div class="post-meta">
+            <span th:text="${post.author}">작성자</span>
+            ·
+            <span th:text="${#temporals.format(post.createdAt, 'yyyy.MM.dd HH:mm')}">작성일</span>
+        </div>
+        <div class="post-content" th:text="${post.content}">내용</div>
+
+        <div class="actions">
+            <a class="btn" th:href="@{/alcohol/review}">목록</a>
+            <a class="btn" th:href="@{|/alcohol/review/${post.id}/edit|}">수정</a>
+            <form th:action="@{|/alcohol/review/${post.id}|}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button class="btn primary" type="submit">삭제</button>
+            </form>
+        </div>
+    </article>
+</main>
+
+<script th:src="@{/js/app.js}" defer></script>
+</body>
+</html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>하늘 - 시음후기</title>
 
-    <!-- 폰트: 페이지 간 동일 렌더링용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
@@ -13,44 +12,26 @@
     <link rel="stylesheet" th:href="@{/css/site.css}" />
     <link rel="stylesheet" th:href="@{/css/nav.css}" />
     <link rel="stylesheet" th:href="@{/css/app.css}" />
-    <link rel="stylesheet" th:href="@{/css/board.css}"/>
+    <link rel="stylesheet" th:href="@{/css/board.css}" />
 </head>
-
-<body class="app review">
-<!-- 공통 네비 -->
+<body class="app board">
 <div th:replace="fragments/nav :: navbar"></div>
 
-<main class="board-wrap wrap" style="margin:26px auto 80px;">
-    <div class="board-header" style="display:flex;align-items:center;justify-content:space-between;margin:12px 0 14px;">
-        <h1 class="board-title" style="margin:0;font-size:22px;">시음 후기 ☁️</h1>
-        <!-- 후기 작성으로 이동 -->
-        <a class="btn primary" th:href="@{/alcohol/review/write}">글쓰기</a>
+<main class="board-wrap">
+    <div class="board-header">
+        <h1 class="board-title">시음 후기</h1>
+        <a class="btn primary" th:href="@{/alcohol/write}">글쓰기</a>
     </div>
 
-    <!-- 글 목록 (List 기반) -->
-    <ul class="post-list" style="display:grid;gap:12px;grid-template-columns:1fr;list-style:none;margin:0;padding:0;">
-        <li class="post-item"
-            th:each="p : ${posts}"
-            style="background:var(--card);border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:var(--shadow-sm);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;transition:.16s;">
-            <a class="title"
-               th:href="@{|/alcohol/review/${p.id}|}"
-               th:text="${p.title}"
-               style="font-weight:700;font-size:16px;margin-right:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;color:inherit;">제목</a>
-
-            <!-- 메타: 작성자 · 날짜 -->
-            <span class="meta" style="color:var(--muted);font-size:14px;white-space:nowrap;">
-          <span th:text="${p.author}">작성자</span>
-          &nbsp;·&nbsp;
-          <span th:text="${#temporals.format(p.createdAt, 'yyyy.MM.dd HH:mm')}">날짜</span>
-        </span>
-        </li>
-
-        <!-- 데이터 없을 때 -->
-        <li th:if="${posts == null or #lists.isEmpty(posts)}"
-            style="background:var(--card);border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:var(--shadow-sm);padding:18px 16px;text-align:center;">
-            시음 후기를 남겨줘! ✍️
-        </li>
-    </ul>
+    <section class="post-grid">
+        <a class="post-card"
+           th:href="@{|/alcohol/review/${p.id}|}"
+           th:each="p : ${posts}">
+            <h3 class="post-title" th:text="${p.title}">제목</h3>
+            <div class="post-author" th:text="${p.author}">작성자</div>
+        </a>
+        <div class="empty" th:if="${posts == null or #lists.isEmpty(posts)}">시음 후기를 남겨줘! ✍️️</div>
+    </section>
 </main>
 
 <script th:src="@{/js/app.js}" defer></script>
