@@ -74,9 +74,8 @@ public class AlcoholController {
     @PostMapping("/board/{id}/edit")
     public String editBoardForm(@PathVariable("id") Long id,
                                 @RequestParam("title") String title,
-                                @RequestParam("content") String content,
-                                @RequestParam("author") String author) {
-        alcoholService.update(id, title, content, author);
+                                @RequestParam("content") String content) {
+        alcoholService.update(id, title, content);
 
         return "redirect:/alcohol/board/" + id;
     }
@@ -139,9 +138,8 @@ public class AlcoholController {
     @PostMapping("/review/{id}/edit")
     public String editReviewForm(@PathVariable("id") Long id,
                                  @RequestParam("title") String title,
-                                 @RequestParam("content") String content,
-                                 @RequestParam("author") String author) {
-        alcoholService.update(id, title, content, author);
+                                 @RequestParam("content") String content) {
+        alcoholService.update(id, title, content);
 
         return "redirect:/alcohol/review/" + id;
     }

@@ -68,7 +68,17 @@
           th:object="${post}">
 
         <input th:field="*{title}" type="text" placeholder="제목" required>
-        <input th:field="*{author}" type="text" placeholder="작성자" required>
+        <!-- 작성일 때만 보이기 -->
+        <input th:if="${post.id == null}"
+               th:field="*{author}"
+               type="text"
+               placeholder="작성자"
+               required>
+        <!-- 수정일 때만 보이기 -->
+        <p th:if="${post.id != null}"
+           th:text="${post.author}"
+           style="padding:10px 12px; font-weight:600;">
+        </p>
         <textarea th:field="*{content}" rows="12" placeholder="내용" required></textarea>
 
         <div class="write-actions">

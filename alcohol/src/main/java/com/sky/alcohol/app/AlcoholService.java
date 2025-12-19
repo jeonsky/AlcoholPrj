@@ -40,11 +40,11 @@ public class AlcoholService {
     }
 
     @Transactional
-    public void update(Long id, String title, String content, String author) {
+    public void update(Long id, String title, String content) {
         var post = alcoholRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        post.change(title, content, author);
+        post.change(title, content);
     }
 
 }
