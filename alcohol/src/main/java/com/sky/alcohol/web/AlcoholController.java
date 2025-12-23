@@ -41,7 +41,8 @@ public class AlcoholController {
     // ===== 자유게시판 글 작성 =====
     @GetMapping("/write")
     public String write(Model model) {
-        model.addAttribute("post", new Alcohol());  // null 절대 금지
+        model.addAttribute("post", new Alcohol());
+        model.addAttribute("mode", "BOARD");
         model.addAttribute("action", "/alcohol/write");
         model.addAttribute("back", "/alcohol/board");
         model.addAttribute("titleText", "자유게시판 글쓰기");
@@ -105,7 +106,8 @@ public class AlcoholController {
     // ===== 시음 후기 글 작성 =====
     @GetMapping("/review/write")
     public String reviewWrite(Model model) {
-        model.addAttribute("post", new Review());  // null 금지
+        model.addAttribute("post", new Review());
+        model.addAttribute("mode", "REVIEW");
         model.addAttribute("action", "/alcohol/review/write");
         model.addAttribute("back", "/alcohol/review");
         model.addAttribute("titleText", "시음 후기 글쓰기");
@@ -125,7 +127,7 @@ public class AlcoholController {
     @GetMapping("/review/{id}/edit")
     public String editReview(@PathVariable("id") Long id, Model model) {
 
-        var post = alcoholService.getOne(id);  // 기존 글 불러오기
+        var post = reviewService.getOne(id);  // 기존 글 불러오기
 
         model.addAttribute("post", post);   // write.html에서 바로 사용됨
         model.addAttribute("action", "/alcohol/review/" + id + "/edit");
@@ -139,7 +141,7 @@ public class AlcoholController {
     public String editReviewForm(@PathVariable("id") Long id,
                                  @RequestParam("title") String title,
                                  @RequestParam("content") String content) {
-        alcoholService.update(id, title, content);
+        reviewService.update(id, title, content);
 
         return "redirect:/alcohol/review/" + id;
     }

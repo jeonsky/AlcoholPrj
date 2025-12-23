@@ -47,7 +47,7 @@ public class Alcohol {
     }
 
     public void changeTitle(String title) { this.title = title; }
-    public void changeContent(String content) { this.content = content; }
+    // public void changeContent(String content) { this.content = content; }
 
     public void change(String title, String content) {
         this.title = title;

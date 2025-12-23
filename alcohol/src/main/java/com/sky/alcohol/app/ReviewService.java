@@ -39,4 +39,12 @@ public class ReviewService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         reviewRepository.delete(post);
     }
+
+    @Transactional
+    public void update(Long id, String title, String content) {
+        var post = reviewRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        post.change(title, content);
+    }
 }

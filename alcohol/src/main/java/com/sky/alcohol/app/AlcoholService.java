@@ -46,5 +46,4 @@ public class AlcoholService {
 
         post.change(title, content);
     }
-
 }
