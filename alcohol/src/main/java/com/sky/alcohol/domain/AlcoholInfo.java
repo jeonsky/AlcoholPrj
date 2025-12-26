@@ -41,4 +41,7 @@ public class AlcoholInfo {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public void change(String title) {
+    }
 }

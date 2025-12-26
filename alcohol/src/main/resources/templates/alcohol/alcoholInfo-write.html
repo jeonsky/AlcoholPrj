@@ -1,0 +1,107 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>하늘 - 주류 도감 등록</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+
+    <style>
+        body.app.write .write-wrap{ max-width:860px; margin:26px auto 80px; padding:0 var(--pad); }
+        body.app.write form{
+            display:grid; gap:14px;
+            background:var(--card);
+            border:1px solid rgba(0,0,0,.08);
+            border-radius:14px;
+            box-shadow:var(--shadow-sm);
+            padding:16px;
+        }
+        body.app.write input,
+        body.app.write textarea{
+            width:100%;
+            border:1px solid rgba(0,0,0,.15);
+            border-radius:10px;
+            padding:10px 12px;
+            background:#fff;
+            font: inherit;
+        }
+        body.app.write textarea{ min-height:160px; resize:vertical; }
+        .write-actions{
+            display:flex; gap:10px; justify-content:flex-end; margin-top:6px;
+        }
+        .btn-submit{
+            background: var(--btn-primary-bg);
+            color: var(--btn-primary-fg);
+            border:1px solid var(--btn-primary-bg);
+            padding:10px 14px;
+            border-radius:12px;
+            font-weight:600;
+            cursor:pointer;
+        }
+        .btn-cancel{
+            background:var(--btn-default-bg);
+            color:var(--btn-default-fg);
+            border:1px solid var(--btn-default-border);
+            padding:10px 14px;
+            border-radius:12px;
+            text-decoration:none;
+        }
+    </style>
+</head>
+
+<body class="app write">
+
+<div th:replace="fragments/nav :: navbar"></div>
+
+<main class="write-wrap">
+    <h1 th:text="${titleText} ?: '주류 도감 등록'">주류 도감 등록</h1>
+
+    <form th:action="@{/alcohol/alcoholInfo-write}" method="post" th:object="${info}">
+
+        <!-- 술 이름 -->
+        <input th:field="*{name}" type="text" placeholder="술 이름" required />
+
+        <!-- 주종 -->
+        <input th:field="*{type}" type="text" placeholder="주종 (소주, 맥주 등)" required />
+
+        <!-- 도수 -->
+        <input th:field="*{abv}" type="number" step="0.1" placeholder="도수 (%)" />
+
+        <!-- 용량 -->
+        <input th:field="*{volume}" type="number" placeholder="용량 (ml)" />
+
+        <!-- 원산지 -->
+        <input th:field="*{origin}" type="text" placeholder="원산지" />
+
+        <!-- 브랜드 -->
+        <input th:field="*{brand}" type="text" placeholder="브랜드 / 제조사" />
+
+        <!-- 세부 분류 -->
+        <input th:field="*{category}" type="text" placeholder="세부 분류 (IPA, Lager 등)" />
+
+        <!-- 가격 -->
+        <input th:field="*{price}" type="number" placeholder="가격 (원)" />
+
+        <!-- 이미지 -->
+        <input th:field="*{imageUrl}" type="text" placeholder="이미지 URL" />
+
+        <!-- 설명 -->
+        <textarea th:field="*{description}" placeholder="술 설명"></textarea>
+
+        <div class="write-actions">
+            <button class="btn-submit" type="submit">등록 📔</button>
+            <a class="btn-cancel" th:href="@{/alcohol/alcoholInfo}">취소 🍪</a>
+        </div>
+    </form>
+</main>
+
+<script th:src="@{/js/app.js}" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>하늘 - 주류 도감</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/css/nav.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+    <link rel="stylesheet" th:href="@{/css/board.css}" />
+</head>
+<body class="app board">
+<div th:replace="fragments/nav :: navbar"></div>
+
+<main class="board-wrap">
+    <div class="board-header">
+        <h1 class="board-title">주류 도감</h1>
+        <a class="btn primary" th:href="@{/alcohol/alcoholInfo/alcoholInfo-write}">글쓰기</a>
+    </div>
+
+    <section class="post-grid">
+        <a class="post-card"
+           th:href="@{|/alcohol/alcoholInfo/${p.id}|}"
+           th:each="p : ${posts}">
+            <h3 class="post-title" th:text="${p.title}">제목</h3>
+            <div class="post-author" th:text="${p.author}">작성자</div>
+        </a>
+        <div class="empty" th:if="${posts == null or #lists.isEmpty(posts)}">주류 도감 페이지 ✍️️</div>
+    </section>
+</main>
+
+<script th:src="@{/js/app.js}" defer></script>
+</body>
+</html>
