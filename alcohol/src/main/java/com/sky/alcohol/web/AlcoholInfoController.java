@@ -22,14 +22,14 @@ public class AlcoholInfoController {
     }
 
     // 주류 도감 상세
-    @GetMapping("/alcoholInfo/{id}")
+    @GetMapping("/alcoholInfo/{id:\\d+}")
     public String detail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("info", alcoholInfoService.getOne(id));
         return "alcohol/alcoholInfo-detail";
     }
 
     // 주류 도감 작성 폼
-    @GetMapping("/alcoholInfo/alcoholInfo-write")
+    @GetMapping("/alcoholInfo/write")
     public String writeForm(Model model) {
         model.addAttribute("info", new AlcoholInfo());
         model.addAttribute("titleText", "주류 도감 등록");
@@ -37,8 +37,8 @@ public class AlcoholInfoController {
     }
 
     // 주류 도감 저장
-    @PostMapping("/alcoholInfo/alcoholInfo-write")
-    public String write(@ModelAttribute AlcoholInfo info) {
+    @PostMapping("/alcoholInfo/write")
+    public String save(@ModelAttribute AlcoholInfo info) {
         alcoholInfoService.save(info);
         return "redirect:/alcohol/alcoholInfo";
     }

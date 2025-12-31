@@ -63,7 +63,7 @@
 <main class="write-wrap">
     <h1 th:text="${titleText} ?: '주류 도감 등록'">주류 도감 등록</h1>
 
-    <form th:action="@{/alcohol/alcoholInfo-write}" method="post" th:object="${info}">
+    <form th:action="@{/alcohol/alcoholInfo/save}" method="post" th:object="${info}">
 
         <!-- 술 이름 -->
         <input th:field="*{name}" type="text" placeholder="술 이름" required />
